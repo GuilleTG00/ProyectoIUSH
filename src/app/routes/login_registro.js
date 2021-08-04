@@ -87,6 +87,28 @@ module.exports = app => {
             
             });
 
+            app.get('/hacerpedido', (req,res) => {
+                if(req.session.loggedin && req.session.rol == "cliente"){
+                    connection.query('SELECT * FROM productos',(err,result1)=>{
+                   
+                        connection.query('SELECT * FROM servicios',(err,result2)=>{
+                         res.render("../views/verproser.ejs",{
+                             productos:result1,
+                             servicios:result2,
+                             name:req.session.name
+                        })
+                         
+                         })
+                     })
+                    
+                }else{
+                    res.render("../views/index.ejs",{
+                        login:false,
+                        name: "por favor inicie sesión"
+                });
+                }
+            
+            });
 
 
             app.get('/habilitardeshabilitar',(req,res)=>{
