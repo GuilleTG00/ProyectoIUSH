@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Página principal Admin</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/resources/assets/css/main.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover.css"/>
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header Wrapper -->
+				<div id="header-wrapper">
+					<div class="container">
+
+						<!-- Header -->
+							<header id="header">
+								<div class="inner">
+
+									<!-- Logo -->
+									<a href="/vistas" id="logo"><img style="width:12%" height="100%"  src="/resources/images/logosinnada.png" id="logo"></a>
+										
+									<!-- Nav -->
+										<nav id="nav">
+											<ul>
+												<li><a href="/vistas">Mi Inicio</a></li>
+												<li>
+													<a href="#">Funcionalidades</a>
+													<ul>
+														<li><a href="#">Modificar datos personales</a></li>
+														<li>
+															<a href="#">Productos y/o servicios</a>
+															<ul>
+																<li><a href="#">Hacer un pedido de productos y/o servicios</a></li>
+																<li><a href="#">Visualizar productos y/o servicios</a></li>
+															</ul>
+														</li>
+														</ul>
+												</li>
+												<li><a href="#">Mis órdenes</a></li>
+												<li><a href="/logout">Cerrar Sesión</a></li>
+												
+											</ul>
+										</nav>
+
+								</div>
+							</header>
+
+					</div>
+				</div>
+
+			<!-- Main Wrapper -->
+				<div id="main-wrapper">
+					<div class="wrapper style2">
+						<div class="inner">
+							<div class="container">
+								<div id="content">
+
+									<!-- Content -->
+
+										<article>
+											<header class="major">
+												<h2 style="text-align:center">Bienvenido al sistema, cliente: <%= name %> </h2>
+												
+												<p style="text-align:center">Desde acá podrás usar nuestra plataforma F.A.S.T.</p>
+											</header>
+
+											<span class="image featured" style="height:auto; max-width: 100%; "><img src="/resources/images/Logo frank.png" alt="" /></span>
+											
+											<h2 style="text-align:center;">A continuación, te mostraremos las funcionalidades que tienes disponibles:</h2>
+											<p style="text-align:center;"><strong>(Dar click en alguna imagen te redirecciona a su respectiva funcionalidad)</strong></p>
+											
+											<section class="container box feature1">
+												<div class="row" style=" display: flex; height:auto; max-width:100%; flex-direction:row;flex-wrap: wrap;align-items:center;">
+												
+													
+													<div class="col-4 col-12-medium">
+														<section>
+															<a href="/logout" class="image featured"><img src="/resources/images/exit.gif" class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE" alt=""/></a>
+															<header>
+																<h2 style="text-align:center; ">Cerrar sesión</h2>
+																<p>aquí puedes desconectarte de la aplicación.</p>
+															</header>
+														</section>
+													</div>
+													<div class="col-4 col-12-medium">
+														<section>
+															<a href="/verproser" class="image featured"><img src="/resources/images/servicioss.png" class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE" alt=""/></a>
+															<header>
+																<h2 style="text-align:center; ">Visualizar productos y/o servicios</h2>
+																<p>Aquí puedes visualizar los productos y servicios que tenemos para tí</p>
+															</header>
+														</section>
+													</div>
+													<div class="col-4 col-12-medium">
+														<section>
+															<div>
+																<a href="/modificar-datos" class="image featured"><img src="/resources/images/seguridad.png" class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE;" alt=""/></a>
+																<header>
+																	<h2 style="text-align:center">Modificar mis datos de acceso</h2>
+																	<p>aquí puedes modificar tus datos para acceder a la aplicación.</p>
+																</header>
+															</div>
+															
+														</section>
+													</div>
+													<div class="col-4 col-12-medium">
+														<section>
+															<div>
+																<a href="#" class="image featured"><img src="/resources/images/ordenes.png" class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE;" alt=""/></a>
+																<header>
+																	<h2 style="text-align:center">Mis Órdenes</h2>
+																	<p>aquí puedes visualizar y administrar tus órdenes activas</p>
+																</header>
+															</div>
+															
+														</section>
+													</div>
+
+													<div class="col-4 col-12-medium">
+														<section>
+															<div>
+																<a href="#" class="image featured"><img src="/resources/images/pedidos.png" class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE;" alt=""/></a>
+																<header>
+																	<h2 style="text-align:center">Hacer pedido</h2>
+																	<p>aquí puedes hacer un pedido de productos y/o servicios ofrecidos en la plataforma.</p>
+																</header>
+															</div>
+															
+														</section>
+													</div>
+
+													<div class="col-4 col-12-medium">
+														<section>
+															<div>
+																<a href="#" class="image featured"><img src="/resources/images/eliminar.png" class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE;" alt=""/></a>
+																<header>
+																	<h2 style="text-align:center">Eliminar cuenta</h2>
+																	<p>aquí puedes eliminar definitivamente esta cuenta de la plataforma F.A.S.T.</p>
+																</header>
+															</div>
+															
+														</section>
+													</div>
+											
+
+											
+										</article>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
+
+			
+
+		<!-- Scripts -->
+			<script src="/resources/assets/js/jquery.min.js"></script>
+			<script src="/resources/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/assets/js/browser.min.js"></script>
+			<script src="/resources/assets/js/breakpoints.min.js"></script>
+			<script src="/resources/assets/js/util.js"></script>
+			<script src="/resources/assets/js/main.js"></script>
+
+	</body>
+</html>

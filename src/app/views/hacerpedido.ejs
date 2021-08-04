@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Página principal Admin</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/resources/assets/css/cards.css"/>
+		<link rel="stylesheet" href="/resources/assets/css/main.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover.css"/>
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header Wrapper -->
+				<div id="header-wrapper">
+					<div class="container">
+
+						<!-- Header -->
+							<header id="header">
+								<div class="inner">
+
+									<!-- Logo -->
+									<a href="/vistas" id="logo"><img style="width:12%" height="100%"  src="/resources/images/logosinnada.png" id="logo"></a>
+										
+									<!-- Nav -->
+										<nav id="nav">
+											<ul>
+												<li><a href="/vistas">Mi Inicio</a></li>
+												<li>
+													<a href="#">Funcionalidades</a>
+													<ul>
+														<li><a href="#">Modificar datos personales</a></li>
+														<li>
+															<a href="#">Productos y/o servicios</a>
+															<ul>
+																<li><a href="#">Hacer un pedido de productos y/o servicios</a></li>
+																<li><a href="#">Visualizar productos y/o servicios</a></li>
+															</ul>
+														</li>
+														</ul>
+												</li>
+												<li><a href="#">Mis órdenes</a></li>
+												<li><a href="/logout">Cerrar Sesión</a></li>
+												
+											</ul>
+										</nav>
+
+								</div>
+							</header>
+
+					</div>
+				</div>
+
+			<!-- Main Wrapper -->
+				<div id="main-wrapper">
+					<div class="wrapper style2">
+						<div class="inner">
+							<div class="container">
+								<div id="content">
+
+									<!-- Content -->
+
+										<article>
+											<header class="major">
+												<h2 style="text-align:center">Bienvenido al sistema, cliente: <%= name %> </h2>
+												
+												<p style="text-align:center">Desde acá podrás usar nuestra plataforma F.A.S.T.</p>
+											</header>
+
+											<span class="image featured" style="height:auto; max-width: 100%; "><img src="/resources/images/Logo frank.png" alt="" /></span>
+											
+											<h2 style="text-align:center;">A continuación, podrás visualizar los productos y servicios ofrecidos en la plataforma</h2>
+																						
+											<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+	<h1 style="text-align:center">Productos</h1>
+    <div class="row">
+		
+        <!-- Product-->
+		<% let i = 0;
+		for (i = 0;i<productos.length;i++){
+		%>
+		<div class="col-lg-4 col-sm-6 mb-30" style="max-width:33.3%;">
+            <div class="product-card mx-auto mb-5 testing">
+                <div class="product-head text-right">
+                    <div class="rating-stars"><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star"></i>
+                    </div>
+                </div>
+                <a class="product-thumb" href="#"><img src="/resources/images/Tecnologiaproductos.jpg" alt="Product Thumbnail"></a>
+                <div class="product-card-body"><a class="product-meta" href="#">Sección: <%= productos[i].seccion %></a>
+                    <h5 class="product-title"><a href="#">Nombre: <%=productos[i].nombre %></a></h5><span class="product-price"><b>Precio:</b> <%=productos[i].precio %> <b>COP</b></span></h5><span class="product-price descripcion"><b>Descripción:</b> <%=productos[i].descripcion %></span>
+                </div>
+                <div class="product-buttons-wrap">
+                    <div class="product-buttons">
+                        <div class="product-button tooltip bottom"><a href="#"><i class="fa fa-info"></i></a><span class="tiptext">Más información</span></div>
+                        
+                        <div class="product-button tooltip bottom"><a href="#" onclick="agregar(<%= productos[i].id%>,<%= productos[i].precio%>,'producto')"><i class="fa fa-shopping-cart"></i></a><span class="tiptext">Agregar al carrito</span></div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+	<% }%>
+		
+    </div>
+	
+	<h1 style="text-align:center;padding-top:10%">Servicios</h1>
+	<div class="row">
+		
+        
+		<%i = 0;
+		for (i = 0;i<servicios.length;i++){
+		%>
+		<div class="col-lg-4 col-sm-6 mb-30" style="max-width:33.3%;">
+            <div class="product-card mx-auto mb-5 testing">
+                <div class="product-head text-right">
+                    <div class="rating-stars"><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star active"></i><i class="fa fa-star"></i>
+                    </div>
+                </div>
+                <a class="product-thumb" href="#"><img src="/resources/images/servicio_al_cliente.png" alt="Product Thumbnail"></a>
+                <div class="product-card-body"><a class="product-meta" href="#">Sección: <%= servicios[i].seccion %></a>
+                    <h5 class="product-title"><a href="#">Nombre: <%=servicios[i].nombre %></a></h5><span class="product-price"><b>Precio:</b> <%=servicios[i].precio %> <b>COP</b></span></h5><span class="product-price descripcion"><b>Descripción:</b> <%=servicios[i].descripcion %></span>
+                </div>
+                <div class="product-buttons-wrap">
+                    <div class="product-buttons">
+						<div class="product-button tooltip bottom"><a href="#"><i class="fa fa-info"></i></a><span class="tiptext">Más información</span></div>
+						<div class="product-button tooltip bottom" onclick="agregar(<%= servicios[i].id%>,<%= servicios[i].precio%>,'servicio')"><a href="#"><i class="fa fa-shopping-cart"></i></a><span class="tiptext">Agregar al carrito</span></div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+	<% }%>
+		
+    </div>
+
+
+
+</div>
+
+<h1 style="text-align:center;padding-top:10%">¿Cuanto llevo en mi carrito?</h1>
+<h1 id="carrito"></h1>
+<div>
+	<form action="verproser" method="post">
+		<button type="submit" onclick="pasostring(productos,servicios)" style="border-radius:5%">
+		<span>Ver mi carrito</span>
+		</button>
+	</form>
+	
+</div>
+
+
+	
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.10.0/feather.js"></script>
+										</article>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
+
+			
+
+		<!-- Scripts -->
+
+<script>
+  let productos=[];
+  let total=0;
+  let servicios=[];
+  
+  function agregar(id,precio,tipo){
+    var producto={
+      id:id,
+      precio:precio,
+      tipo:tipo,
+    }
+      console.log(id,precio);
+	  if (tipo == "producto"){
+		productos.push(producto);
+	  }else if (tipo == "servicio"){
+		  servicios.push(producto);
+	  }
+      
+      total=total+precio;
+	  console.log(total);
+      console.log(productos);
+	  console.log(servicios);
+	  return (productos,servicios);
+  document.getElementById("carrito").innerHTML= `Pagar $${total}`
+  }
+
+function pasostring(productos,servicios){
+	var string1 = JSON.stringify(productos);
+	var string2 = JSON.stringify(servicios);
+	return (string1,string2);
+
+}
+  
+
+</script>
+
+
+
+			<script src="/resources/assets/js/jquery.min.js"></script>
+			<script src="/resources/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/assets/js/browser.min.js"></script>
+			<script src="/resources/assets/js/breakpoints.min.js"></script>
+			<script src="/resources/assets/js/util.js"></script>
+			<script src="/resources/assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Página principal Admin</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/resources/assets/css/main.css"/>
+		
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover.css"/>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+		<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
+		
+		
+		
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header Wrapper -->
+				<div id="header-wrapper">
+					<div class="container">
+
+						<!-- Header -->
+							<header id="header">
+								<div class="inner">
+
+									<!-- Logo -->
+									<a href="/vistas" id="logo"><img style="width:12%" height="100%"  src="/resources/images/logosinnada.png" id="logo"></a>
+										
+									<!-- Nav -->
+										<nav id="nav">
+											<ul>
+												<li><a href="/vistas">Mi Inicio</a></li>
+												<li>
+													<a href="#">Funcionalidades</a>
+													<ul>
+														<li><a href="#">Modificar mis datos de acceso</a></li>
+														<li>
+															<a href="#">Gestionar aplicación</a>
+															<ul>
+																<li><a href="#">Historial de Órdenes</a></li>
+																<li><a href="#">Manejo de catálogo</a></li>
+																<li><a href="#">Crear vendedor</a></li>
+																<li><a href="#">Eliminar vendedor</a></li>
+															</ul>
+														</li>
+														</ul>
+												</li>
+												<li><a href="/logout">Cerrar Sesión</a></li>
+												
+											</ul>
+										</nav>
+
+								</div>
+							</header>
+
+					</div>
+				</div>
+
+			<!-- Main Wrapper -->
+				<div id="main-wrapper">
+					<div class="wrapper style2">
+						<div class="inner">
+							<div class="container">
+								<div id="content">
+
+									<!-- Content -->
+
+										<article>
+											<header class="major">
+												<h2 style="text-align:center"><% if(name){ %>
+													<%=name %>
+											 		<%}%> 
+													, aquí puedes administrar los vendedores</h2>
+												
+											
+											</header>
+											
+											<h2 style="text-align:center;">A continuación, elige qué campos deseas cambiar.</h2>
+
+											
+											<section class="container box feature1">
+												<div class="row" style=" display: flex; height:auto; max-width:100%; flex-direction:row;flex-wrap: wrap;align-items:center;">
+												
+													
+						
+
+													
+													
+													<div class="col-md-6" style="max-height: 30%; max-width:30%; min-height:330px; min-width:330px; border:3px">
+														<section>
+															<div>
+																
+																<header>
+																	<a href=""  class="image featured"><img src="/resources/images/seguridad.png"  class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE; background-color: white;" alt=""/></a>
+																	<h2 style="text-align:center">Administrar Vendedores.</h2>
+																	<p>Aquí podrás ver, eliminar y crear vendedores en la plataforma</p>
+																	
+																</header>
+															</div>
+															
+														</section>
+														
+														<section>
+															<div>
+																
+																<header>
+																	<a href="/gestionaraplicacion"  class="image featured"><img src="/resources/images/flechaizq.png"  class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE; background-color: white;" alt=""/></a>
+																	<h2 style="text-align:center">Volver atrás</h2>
+																	<p>Haz click en la imagen para volver a las funcionalidades anteriores.</p>
+																	
+																</header>
+															</div>
+															
+														</section>
+
+													</div>
+
+													
+													<div class="col" style="margin-top:0; padding-top:0;">
+														<div class="accordion" id="accordionPanelsStayOpenExample" style="margin-top:0">
+															<div class="accordion-item">
+															  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+																<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" style="background-color:#4890B9;">
+																  Ver Vendedores
+																</button>
+															  </h2>
+															  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+																<div class="accordion-body">
+																	<table  id="tabla" class="table table-striped">
+																	<thead>
+																		<tr>
+																			<th>ID</th>
+																			<th>username</th>
+																			<th>nombre</th>
+																			<th>apellido</th>
+																			<th>email</th>
+																			<th>Eliminar vendedor</th>
+																		</tr>
+																	</thead>
+																		<%for (let i=0;i<vendedores.length;i++){ %>
+																		<tbody>	
+																			<tr>
+																				<td><%= vendedores[i].id %></td>
+																				<td><%= vendedores[i].username %></td>
+																				<td><%= vendedores[i].nombre %></td>
+																				<td><%= vendedores[i].apellido %></td>
+																				<td><%= vendedores[i].email %></td>
+																				<td><a class="btn btn-primary" href="/deletevendedor/<%= vendedores[i].id %>">Eliminar vendedor</a></td>
+																			</tr>
+																		</tbody>
+																			<% } %>
+																</table> 
+																</div>
+															  </div>
+															</div>
+															<div class="accordion-item">
+															  <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+																<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+																  Crear Vendedor
+																</button>
+															  </h2>
+															  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+																<div class="accordion-body">
+																	<div class="card-body">
+																		<h3 cl>Ingresa aquí los datos del nuevo vendedor</h3>
+																		<form method="POST" action="crearvendedor">
+																			<div class="input-group form-group " style="width:500px; display:inline-flex; justify-content:center">
+																				<div class="input-group-prepend">
+																					<span class="input-group-text" style="background-color:#2FD5FF"><i class="fas fa-user fa-2x" style="width:30px"></i></span>
+																				</div>
+																				<input name="user" type="text" style="width:30px" class="form-control" placeholder="Nombre de usuario" required>
+																				
+																			</div>
+																			<div class="input-group form-group" style="width:500px; display:inline-flex; justify-content:center">
+																				<div class="input-group-prepend">
+																					<span class="input-group-text" style="background-color:#2FD5FF"><i class="fas fa-key fa-2x" style="width:30px"></i></span>
+																				</div>
+																				<input name="pass" type="password" class="form-control" placeholder="Contraseña" required>
+																				
+																			</div>
+																			
+																			<div class="input-group form-group" style="width:500px; display:inline-flex; justify-content:center">
+																				<div class="input-group-prepend">
+																					<span class="input-group-text" style="background-color:#2FD5FF"><i class="fas fa-user fa-2x" style="width:30px"></i></span>
+																				</div>
+																				<input name="nombre" type="text" class="form-control" placeholder="Nombres" required>
+																			</div>
+																			<div class="input-group form-group" style="width:500px; display:inline-flex; justify-content:center">
+																				<div class="input-group-prepend">
+																					<span class="input-group-text" style="background-color:#2FD5FF"><i class="fas fa-user fa-2x" style="width:30px"></i></span>
+																				</div>
+																				<input name="apellido" type="text" class="form-control" placeholder="Apellidos" required>
+																			</div>
+																			<div class="input-group form-group" style="width:500px; display:inline-flex; justify-content:center">
+																				<div class="input-group-prepend" >
+																					<span class="input-group-text" style="background-color:#2FD5FF"><i class="fas fa-phone fa-2x" style="width:30px"></i></span>
+																				</div>
+																				<input name="telefono" type="text" class="form-control" placeholder="Teléfono de contacto" required>
+																			</div>
+																			<div class="input-group form-group" style="width:500px; display:inline-flex; justify-content:center">
+																				<div class="input-group-prepend">
+																					<span class="input-group-text" style="background-color:#2FD5FF"><i class="fas fa-mail-bulk fa-2x" style="width:30px"></i></span>
+																				</div>
+																				<input name="email" type="email" class="form-control" placeholder="E-mail" required>
+																			</div>
+																			
+																	</div>
+																	<div>
+																		<button type="submit" style="border-radius:5%">
+																			<span>Crear Vendedor</span>
+																			  </button>
+																	</div>
+					
+																</div>
+															  </div>
+															</div>
+															
+														  </div>
+													</div>
+												
+												</div>
+
+											</div>
+									
+										</article>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					
+					
+					<script>
+						$(document).ready( function () {
+    					$('#tabla').DataTable();
+						} );
+					
+					</script>
+
+			
+
+		<!-- Scripts -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			<script src="/resources/js/gsap.js"></script>
+			<script src="/resources/assets/js/jquery.min.js"></script>
+			<script src="/resources/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/assets/js/browser.min.js"></script>
+			<script src="/resources/assets/js/breakpoints.min.js"></script>
+			<script src="/resources/assets/js/util.js"></script>
+			<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+			<script src="/resources/assets/js/main.js"></script>
+
+
+			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+			<% if(typeof alert !="undefined"){ %>
+				<script>
+					Swal.fire({
+						title: "<%= alertTitle %>",
+						alertMessage:"<%= alertMessage %>",
+						icon: "<%=alertIcon%>",
+						showConfirmButton: "<%=showConfirmButton%>",
+						timer: "<%= timer %>"
+					}).then(() => {
+						window.location ="/<%=ruta%>"
+					})
+				</script>
+			<% } %> 
+		
+
+	</body>
+</html>

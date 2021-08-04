@@ -1,0 +1,140 @@
+
+
+
+.mouse-cursor-gradient-tracking {
+    position: relative;
+    background: #54A3CE;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    border: none;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+  }
+  
+
+  .mouse-cursor-gradient-tracking span {
+    position: relative;
+  }
+  
+  .mouse-cursor-gradient-tracking:before {
+    --size: 0;
+    content: '';
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--size);
+    height: var(--size);
+    font-family: 'Montserrat', sans-serif;
+    background: radial-gradient(circle closest-side, #0D52BD, transparent);
+    
+    
+    transition: width 0.2s ease, height 0.2s ease;
+  }
+  
+  .mouse-cursor-gradient-tracking:hover:before {
+    --size: 100px;
+  }
+
+
+
+
+html,body{
+
+background-image: url('../../images/testingagain.gif');
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+
+
+height: 100%;
+font-family: 'Montserrat', sans-serif;
+}
+
+.container{
+  transform:scale(1.1,1.1);
+  min-height:400px;
+  min-width:400px;
+height: 100%;
+align-content:center;
+background-color:rgba(0,0,0,0.4);
+}
+
+.card{
+transform:scale(1.4,1.4);
+max-height:400px;
+min-height:400px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+min-width:400px;
+background-color: rgba(0,0,100,0.5) !important;
+}
+
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #54A3CE;
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+text-align: center;
+color: white;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: #54A3CE;
+color: black;
+border:5 !important;
+}
+
+input:focus{
+outline: 5 5 5 5  !important;
+box-shadow: 5 5 5 5 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}
+
+
+
+
+
+
+/* csss coments 
+*/
+

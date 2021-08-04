@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Página principal Admin</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/resources/assets/css/main.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover.css"/>
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header Wrapper -->
+				<div id="header-wrapper">
+					<div class="container">
+
+						<!-- Header -->
+							<header id="header">
+								<div class="inner">
+
+									<!-- Logo -->
+									<a href="/vistas" id="logo"><img style="width:12%" height="100%"  src="/resources/images/logosinnada.png" id="logo"></a>
+										
+									<!-- Nav -->
+										<nav id="nav">
+											<ul>
+												<li><a href="/vistas">Mi Inicio</a></li>
+												<li>
+													<a href="#">Funcionalidades</a>
+													<ul>
+														<li><a href="#">Modificar mis datos de acceso</a></li>
+														<li>
+															<a href="#">Gestionar aplicación</a>
+															<ul>
+																<li><a href="#">Historial de Órdenes</a></li>
+																<li><a href="#">Manejo de catálogo</a></li>
+																<li><a href="#">Crear vendedor</a></li>
+																<li><a href="#">Eliminar vendedor</a></li>
+															</ul>
+														</li>
+														</ul>
+												</li>
+												<li><a href="/logout">Cerrar Sesión</a></li>
+												
+											</ul>
+										</nav>
+
+								</div>
+							</header>
+
+					</div>
+				</div>
+
+			<!-- Main Wrapper -->
+				<div id="main-wrapper">
+					<div class="wrapper style2">
+						<div class="inner">
+							<div class="container">
+								<div id="content">
+
+									<!-- Content -->
+
+										<article>
+											<header class="major">
+												<h2 style="text-align:center">Bienvenido al sistema, administrador: <%= name %> </h2>
+												
+												<p style="text-align:center">Desde acá podrás administrar la plataforma F.A.S.T.</p>
+											</header>
+
+											<span class="image featured" style="height:auto; max-width: 100%; "><img src="/resources/images/Logo frank.png" alt="" /></span>
+											
+											<h2 style="text-align:center;">Manejo de catálogo</h2>
+											<p style="text-align:center;"><strong>(Dar click en alguna imagen te redirecciona a su respectiva funcionalidad)</strong></p>
+											
+											<section class="container box feature1">
+												<div class="row" style=" display: flex; height:auto; max-width:100%; flex-direction:row;flex-wrap: wrap;align-items:center;">
+												
+													
+													<div class="col-4 col-12-medium">
+														<section>
+															
+															<header>
+																<a href="/vistas"  class="image featured"><img src="/resources/images/flechaizq.png"  class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE; background-color: white;" alt=""/></a>
+																<h2 style="text-align:center">Volver atrás</h2>
+																<p>Haz click en la imagen para volver a las funcionalidades anteriores.</p>
+																
+															</header>
+														</section>
+													</div>
+													<div class="col-4 col-12-medium">
+														<section>
+															<a href="/agregareliminar" class="image featured"><img src="/resources/images/gestion.png" class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE;" alt=""/></a>
+															<header>
+																<h2 style="text-align:center">Agregar o eliminar Productos y/o servicios</h2>
+																<p>Aquí podrás agregar y/o eliminar productos y/o servicios a la plataforma</p>
+															</header>
+														</section>
+													</div>
+													<div class="col-4 col-12-medium">
+														<section>
+															<div>
+																<a href="/habilitardeshabilitar" class="image featured"><img src="/resources/images/seguridad.png" class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE;" alt=""/></a>
+																<header>
+																	<h2 style="text-align:center">habilitar y/o deshabilitar productos y/o servicios</h2>
+																	<p>Aquí podrás habilitar y/o deshabilitar productos y/o servicios de la plataforma</p>
+																</header>
+															</div>
+															
+														</section>
+													</div>
+													
+											
+
+											
+										</article>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					
+
+			
+
+		<!-- Scripts -->
+			<script src="/resources/assets/js/jquery.min.js"></script>
+			<script src="/resources/assets/js/jquery.dropotron.min.js"></script>
+			<script src="/resources/assets/js/browser.min.js"></script>
+			<script src="/resources/assets/js/breakpoints.min.js"></script>
+			<script src="/resources/assets/js/util.js"></script>
+			<script src="/resources/assets/js/main.js"></script>
+
+	</body>
+</html>
