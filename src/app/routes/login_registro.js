@@ -111,9 +111,56 @@ module.exports = app => {
             });
 
             app.get("/productocarrito/:id", (req,res) =>{  
+                const ID = req.params.id; 
+                const idcliente=req.session.id;
+                connection.query("SELECT * FROM carrito WHERE idcliente = ?",[idcliente],(err,result2)=>{
+                    if(result2.length === 0){
+                        connection.query("INSERT INTO carrito SET ?",{ 
+                         idcliente:idcliente
+                         }, (error, results) => {
+                             if(error){
+                                 res.send(error);
+                             }
+                         
+                         })
+                    }
+                        
+
+                    
+                    })
+                    connection.query("SELECT * FROM carrito JOIN carritoaux ON carritoaux.idcarrito = carrito.id JOIN cliente ON carrito.idcliente = cliente.id WHERE id = ?",[idcliente],{ 
+                        
+                        }, (error, results) => {
+                            if(error){
+                                res.send(error);
+                            }
+                        
+                        })
+                connection.query("INSERT INTO carritoaux SET idproducto = ? WHERE idcarrito = ?",{ //la interrogacion indica que lo que sigue es lo que se manda,  
+                   idproducto:ID
+                }, (error, results) => {
+                    if(error){
+                        res.send(error);
+                    }else{
+                       res.render("../views/carrito.ejs",{  //aún está en desarrollo
+                        alert: true,
+                        alertTitle: "Agregado exitosamente",
+                        alertMessage: "¡Agregado exitosamente!",
+                        alertIcon: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        ruta:""
+                       })
+                    }
+                
+                })
+            
+            })
+            
+             app.get("/serviciocarrito/:id", (req,res) =>{  
                 const ID = req.params.id 
                 connection.query("INSERT INTO carritoaux SET ?",{ //la interrogacion indica que lo que sigue es lo que se manda,  
-                   idproducto:ID
+                   idservicio:ID
                 }, async (error, results) => {
                     if(error){
                         res.send(error);
