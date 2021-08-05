@@ -183,7 +183,11 @@
 																				</div>
 																					</tr>
 																			
-
+																					<script>
+																						$('#exampleModal<%=productos[i].id%>').modal('hide');
+																						$('body').removeClass('modal-open');
+																						$('.modal-backdrop').remove();
+																				   </script>
 
 																			<% } %>
 																</table> 

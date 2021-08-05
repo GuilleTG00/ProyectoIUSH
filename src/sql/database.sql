@@ -44,3 +44,10 @@ CREATE TABLE vendedor(
 DESCRIBE users;
 
 SELECT * FROM users;
+
+
+
+
+
+ALTER TABLE carrito
+ADD state ENUM('ACTIVE', 'INACTIVE') DEFAULT 'ACTIVE';
