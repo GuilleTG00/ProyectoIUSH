@@ -87,14 +87,14 @@
                     </div>
                 </div>
                 <a class="product-thumb" href="#"><img src="/resources/images/Tecnologiaproductos.jpg" alt="Product Thumbnail"></a>
-                <div class="product-card-body"><a class="product-meta" href="#">Sección: <%= productos[i].seccion %></a>
+                <div class="product-card-body"><a class="product-meta" href="#">ID: <%= productos[i].id %></a>
                     <h5 class="product-title"><a href="#">Nombre: <%=productos[i].nombre %></a></h5><span class="product-price"><b>Precio:</b> <%=productos[i].precio %> <b>COP</b></span></h5><span class="product-price descripcion"><b>Descripción:</b> <%=productos[i].descripcion %></span>
                 </div>
                 <div class="product-buttons-wrap">
                     <div class="product-buttons">
                         <div class="product-button tooltip bottom"><a href="#"><i class="fa fa-info"></i></a><span class="tiptext">Más información</span></div>
                         
-                        <div class="product-button tooltip bottom"><a href="#" onclick="agregar(<%= productos[i].id%>,<%= productos[i].precio%>,'producto')"><i class="fa fa-shopping-cart"></i></a><span class="tiptext">Agregar al carrito</span></div>
+                        <div class="product-button tooltip bottom"><a href="/productocarrito/<%= productos[i].id %>"><i class="fa fa-shopping-cart"></i></a><span class="tiptext">Agregar al carrito</span></div>
                     </div>
                 </div>
             </div>
@@ -117,13 +117,13 @@
                     </div>
                 </div>
                 <a class="product-thumb" href="#"><img src="/resources/images/servicio_al_cliente.png" alt="Product Thumbnail"></a>
-                <div class="product-card-body"><a class="product-meta" href="#">Sección: <%= servicios[i].seccion %></a>
+                <div class="product-card-body"><a class="product-meta" href="#">ID: <%= servicios[i].id %></a>
                     <h5 class="product-title"><a href="#">Nombre: <%=servicios[i].nombre %></a></h5><span class="product-price"><b>Precio:</b> <%=servicios[i].precio %> <b>COP</b></span></h5><span class="product-price descripcion"><b>Descripción:</b> <%=servicios[i].descripcion %></span>
                 </div>
                 <div class="product-buttons-wrap">
                     <div class="product-buttons">
-						<div class="product-button tooltip bottom"><a href="#"><i class="fa fa-info"></i></a><span class="tiptext">Más información</span></div>
-						<div class="product-button tooltip bottom" onclick="agregar(<%= servicios[i].id%>,<%= servicios[i].precio%>,'servicio')"><a href="#"><i class="fa fa-shopping-cart"></i></a><span class="tiptext">Agregar al carrito</span></div>
+						<div class="product-button tooltip bottom"><a href="/productocarrito/<%=servicios[i].id%>"><i class="fa fa-info"></i></a><span class="tiptext">Más información</span></div>
+						<div class="product-button tooltip bottom"><a href="#"><i class="fa fa-shopping-cart"></i></a><span class="tiptext">Agregar al carrito</span></div>
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
 <h1 id="carrito"></h1>
 <div>
 	<form action="verproser" method="post">
-		<button type="submit" onclick="pasostring(productos,servicios)" style="border-radius:5%">
+		<button type="submit" onclick="" style="border-radius:5%">
 		<span>Ver mi carrito</span>
 		</button>
 	</form>

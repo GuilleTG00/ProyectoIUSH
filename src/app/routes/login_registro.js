@@ -92,7 +92,7 @@ module.exports = app => {
                     connection.query('SELECT * FROM productos',(err,result1)=>{
                    
                         connection.query('SELECT * FROM servicios',(err,result2)=>{
-                         res.render("../views/verproser.ejs",{
+                         res.render("../views/hacerpedido.ejs",{
                              productos:result1,
                              servicios:result2,
                              name:req.session.name
@@ -109,6 +109,31 @@ module.exports = app => {
                 }
             
             });
+
+            app.get("/productocarrito/:id", (req,res) =>{  
+                const ID = req.params.id 
+                connection.query("INSERT INTO carritoaux SET ?",{ //la interrogacion indica que lo que sigue es lo que se manda,  
+                   idproducto:ID
+                }, async (error, results) => {
+                    if(error){
+                        res.send(error);
+                    }else{
+                       res.render("../views/carrito.ejs",{  //aún está en desarrollo
+                        alert: true,
+                        alertTitle: "Agregado exitosamente",
+                        alertMessage: "¡Agregado exitosamente!",
+                        alertIcon: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        ruta:""
+                       })
+                    }
+                
+                })
+            
+            })
+            
+
 
 
             app.get('/habilitardeshabilitar',(req,res)=>{
@@ -162,7 +187,7 @@ module.exports = app => {
             })
 
 
-            app.post("/verproser", (req,res) => {
+    app.post("/verproser", (req,res) => {
                 const ID = req.params.ID;
                 const {option} = req.body
                 console.log(req.body);
@@ -173,12 +198,12 @@ module.exports = app => {
                         res.redirect("/gestionaraplicacion");
                     }
                 })
-            })
+    })
 
 
 
 
-            app.get('/modificar-datos', (req,res) => {
+    app.get('/modificar-datos', (req,res) => {
                 if(req.session.loggedin && req.session.rol == "administrador"){
                     console.log(req.session.idd);
                     connection.query("SELECT * FROM administrador WHERE id = ?",[req.session.idd],(err,result) => {
@@ -209,10 +234,10 @@ module.exports = app => {
                             name: "por favor inicie sesión"
                     });
                     }
-                });
-        
+     });
+       
             
-                app.get('/manejarcatalogo', (req,res) => {
+    app.get('/manejarcatalogo', (req,res) => {
                     if(req.session.loggedin && req.session.rol == "administrador"){
                         res.render("../views/manejarcatalogo.ejs",{
                             login:true,
@@ -226,7 +251,7 @@ module.exports = app => {
                                 name: "por favor inicie sesión"
                         });
                         }
-                    });
+     });
         
     
 
@@ -255,7 +280,7 @@ module.exports = app => {
             });
             }
         });
-        app.get('/administrarvendedores', (req,res) => {
+    app.get('/administrarvendedores', (req,res) => {
             if(req.session.loggedin && req.session.rol == "administrador"){
                 connection.query('SELECT * FROM vendedor',(err,result)=>{
                     
@@ -273,10 +298,10 @@ module.exports = app => {
                         name: "por favor inicie sesión"
                 });
                 }
-            });
+        });
     
            
-            app.post("/agregareliminar", async (req,res) =>{  
+    app.post("/agregareliminar", async (req,res) =>{  
                 console.log(req.body);         
                 const {nombre,descripcion,precio,seccion,deshabilitado,opcion} = req.body;
                 if(opcion == "Producto"){
@@ -329,7 +354,7 @@ module.exports = app => {
 
                 
             
-            })
+        })
 
     app.get('/index', (req,res) => {
         res.render("../views/index.ejs");
@@ -548,6 +573,28 @@ app.post("/modificar-datos", async (req,res) =>{
             }
         })
      
+app.get("/deletevendedor/:id", (req,res) => {
+            const id = req.params.id;
+            connection.query("DELETE FROM vendedor WHERE id = ?", [id], (err, result) => {
+                if(err){
+                    res.send(err);
+                } else {
+                    connection.query("SELECT * FROM vendedor", (err, result) => {
+                        if(err){
+                            res.send(err);
+                        } else {
+                            res.render("../views/gestionaraplicacion.ejs", {
+                                name: req.session.name,
+                                rol:req.session.rol,
+                                id:req.session.id,
+                                
+                                ruta: ""
+                            });
+                        }
+                    })
+                }
+            })
+        })
 
 
         app.post("/modificar-datos-cliente", async (req,res) =>{  
