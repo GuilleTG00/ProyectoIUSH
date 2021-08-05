@@ -36,7 +36,10 @@ body {
 }
 
 
-
+.modal .content {
+	overflow:auto;
+	max-height:calc(100vh - 125px);
+  }
 
   
 .testing{
@@ -219,7 +222,7 @@ input, select, textarea {
 		margin-bottom: 2em;
 		font-family: 'Montserrat', sans-serif;
 	}
-
+	
 	.date {
 		display: block;
 		text-transform: uppercase;

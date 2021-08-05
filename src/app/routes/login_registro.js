@@ -117,9 +117,11 @@ module.exports = app => {
                     if(result2.length === 0){
                         connection.query("INSERT INTO carrito SET ?",{ 
                          idcliente:idcliente
-                         }, (error, results) => {
+                         }, (error, results3) => {
                              if(error){
                                  res.send(error);
+                             }else{
+                                 
                              }
                          
                          })
@@ -128,16 +130,25 @@ module.exports = app => {
 
                     
                     })
-                    connection.query("SELECT * FROM carrito JOIN carritoaux ON carritoaux.idcarrito = carrito.id JOIN cliente ON carrito.idcliente = cliente.id WHERE id = ?",[idcliente],{ 
-                        
-                        }, (error, results) => {
+                    const query = `SELECT * 
+                    FROM carrito 
+                    JOIN carritoaux 
+                    ON carritoaux.idcarrito = carrito.id 
+                    JOIN cliente ON carrito.idcliente = cliente.id_element 
+                    WHERE id_element = ?`;
+                    connection.query(query ,[idcliente]
+                            , (error, results4) => {
                             if(error){
                                 res.send(error);
+                            }else{
+                                conexion:results4
                             }
                         
                         })
+                        
                 connection.query("INSERT INTO carritoaux SET idproducto = ? WHERE idcarrito = ?",{ //la interrogacion indica que lo que sigue es lo que se manda,  
                    idproducto:ID
+                   
                 }, (error, results) => {
                     if(error){
                         res.send(error);
