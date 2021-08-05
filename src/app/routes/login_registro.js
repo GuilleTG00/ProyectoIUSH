@@ -41,7 +41,7 @@ module.exports = app => {
                 }
             });
     
-
+//holis
             app.get('/agregareliminar',(req,res)=>{
                 if(req.session.loggedin && req.session.rol == "administrador"){
                 connection.query('SELECT * FROM productos',(err,result1)=>{
