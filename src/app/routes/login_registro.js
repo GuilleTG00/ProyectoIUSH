@@ -71,7 +71,8 @@ module.exports = app => {
                     res.render("../views/verproser.ejs", {
                         productos: result1,
                         servicios: result2,
-                        name: req.session.name
+                        name: req.session.name,
+                        id: req.session.id_element
                     })
 
                 })
@@ -94,7 +95,8 @@ module.exports = app => {
                     res.render("../views/hacerpedido.ejs", {
                         productos: result1,
                         servicios: result2,
-                        name: req.session.name
+                        name: req.session.name,
+                        id:req.session.id_element
                     })
 
                 })
@@ -110,9 +112,15 @@ module.exports = app => {
     });
 
     app.get("/productocarrito/:id", (req, res) => {
-        const ID = req.params.id;
-        const idcliente = req.session.id;
+        const IDproducto = req.params.id;
+        const idcliente = req.session.id_element;
+        
         connection.query("SELECT * FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
+            console.log(req.session);
+            console.log(result2);
+            let idcarritotest =result2[0].id;
+            console.log(result2.id);
+            console.log("final");
             //Puedo tener el id del carrito (factura) desde aquí en result2.id_carrito
             if (result2.length === 0) {
                 connection.query("INSERT INTO carrito SET ?", { idcliente: idcliente },
@@ -120,13 +128,34 @@ module.exports = app => {
                     if (error) {
                         res.send(error);
                     };
+                    connection.query("SELECT * FROM carrito where idcliente = ?",[idcliente],(error, results) =>{
+                        idcarritotest=result2.id; });
                     //Consulto el número de factura del usuario SELECT * FROM factura WHERE id_uyser = ?
                 });
+                
 
                 //Guardado el idCarrito (Fatura)
             };
             
-            //Para realizar un insert en carritoaux necesito dos parametros ([id_carrito], id_proucto, id_servicio})
+            
+            connection.query("INSERT INTO carritoaux SET ?",{idproducto:IDproducto,idcarrito:idcarritotest,idcliente:idcliente},(error, results5) =>{
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.render("../views/carrito.ejs", {
+                        conexion:results5,
+                        name: req.session.name,
+                        alert: true,
+                        alertTitle: "Agregado exitosamente",
+                        alertMessage: "¡Agregado exitosamente!",
+                        alertIcon: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        ruta: ""
+                    })
+                }
+            });
+           
 
             //Redirija a /hacerpedido
 
@@ -136,6 +165,8 @@ module.exports = app => {
 
 
         });
+        });
+        /*
         const query = `
                 SELECT * FROM carrito
                     JOIN carritoaux
@@ -154,7 +185,7 @@ module.exports = app => {
                 }
 
             })
-//https://qastack.mx/programming/19035373/how-do-i-redirect-in-expressjs-while-passing-some-context
+        //https://qastack.mx/programming/19035373/how-do-i-redirect-in-expressjs-while-passing-some-context
         connection.query("INSERT INTO carritoaux SET idproducto = ? WHERE idcarrito = ?", { //la interrogacion indica que lo que sigue es lo que se manda,  
             idproducto: ID
 
@@ -176,16 +207,41 @@ module.exports = app => {
         })
 
     })
+*/
+app.get("/serviciocarrito/:id", (req, res) => {
+    const IDproducto = req.params.id;
+    const idcliente = req.session.id_element;
+    
+    connection.query("SELECT * FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
+        console.log(req.session);
+        console.log(result2);
+        let idcarritotest =result2[0].id;
+        console.log(result2.id);
+        console.log("final");
+        //Puedo tener el id del carrito (factura) desde aquí en result2.id_carrito
+        if (result2.length === 0) {
+            connection.query("INSERT INTO carrito SET ?", { idcliente: idcliente },
+            (error, results3) => {
+                if (error) {
+                    res.send(error);
+                };
+                connection.query("SELECT * FROM carrito where idcliente = ?",[idcliente],(error, results) =>{
+                    idcarritotest=result2.id; });
+                //Consulto el número de factura del usuario SELECT * FROM factura WHERE id_uyser = ?
+            });
+            
 
-    app.get("/serviciocarrito/:id", (req, res) => {
-        const ID = req.params.id
-        connection.query("INSERT INTO carritoaux SET ?", { //la interrogacion indica que lo que sigue es lo que se manda,  
-            idservicio: ID
-        }, async (error, results) => {
+            //Guardado el idCarrito (Fatura)
+        };
+        
+        
+        connection.query("INSERT INTO carritoser SET ?",{idservicio:IDproducto,idcarrito:idcarritotest,idcliente:idcliente},(error, results5) =>{
             if (error) {
                 res.send(error);
             } else {
-                res.render("../views/carrito.ejs", {  //aún está en desarrollo
+                res.render("../views/carrito.ejs", {
+                    conexion:results5,
+                    name: req.session.name,
                     alert: true,
                     alertTitle: "Agregado exitosamente",
                     alertMessage: "¡Agregado exitosamente!",
@@ -195,11 +251,18 @@ module.exports = app => {
                     ruta: ""
                 })
             }
+        });
+       
 
-        })
+        //Redirija a /hacerpedido
 
-    })
 
+
+
+
+
+    });
+    });
     app.get('/habilitardeshabilitar', (req, res) => {
         if (req.session.loggedin && req.session.rol == "administrador") {
             connection.query('SELECT * FROM productos', (err, result1) => {
@@ -249,10 +312,10 @@ module.exports = app => {
     })
 
     app.post("/verproser", (req, res) => {
-        const ID = req.params.ID;
+        const IDpro = req.params.ID;
         const { option } = req.body
         console.log(req.body);
-        connection.query("UPDATE productos SET deshabilitado = ? WHERE id = ?", [option, ID], (err, result) => {
+        connection.query("UPDATE productos SET deshabilitado = ? WHERE id = ?", [option, IDpro], (err, result) => {
             if (err) {
                 res.send(err);
             } else {
@@ -271,7 +334,7 @@ module.exports = app => {
             })
 
         } else if (req.session.loggedin && req.session.rol == "cliente") {
-            connection.query("SELECT * FROM cliente WHERE id_element = ?", [req.session.id], (err, result) => {
+            connection.query("SELECT * FROM cliente WHERE id_element = ?", [req.session.id_element], (err, result) => {
                 console.log(result);
                 res.render("../views/modificardatoscliente.ejs", {
                     cliente: result
@@ -487,8 +550,8 @@ module.exports = app => {
                             req.session.loggedin = true;
                             req.session.name = results[0].nombre;
                             req.session.rol = results[0].rol;
-                            req.session.idd = results[0].id;
-                            console.log(results[0].rol);
+                            req.session.id_element = results[0].id_element;
+                            
                             //SWAL2 para login correcto
                             res.render("../views/logueo.ejs", {
                                 alert: true,
