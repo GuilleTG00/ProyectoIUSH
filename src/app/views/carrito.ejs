@@ -1,314 +1,479 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Página principal Admin</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/resources/assets/css/main.css"/>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="/resources/assets/js/jquery.min.js"></script>
-			<script src="/resources/assets/js/jquery.dropotron.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover.css"/>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-		<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
-		
-		
-		
-	</head>
-	<body class="no-sidebar is-preload">
-		<div id="page-wrapper">
 
-					<!-- Header Wrapper -->
-					<div id="header-wrapper">
-						<div class="container">
-	
-							<!-- Header -->
-								<header id="header">
-									<div class="inner">
-	
-										<!-- Logo -->
-										<a href="/vistas" id="logo"><img style="width:12%" height="100%"  src="/resources/images/logosinnada.png" id="logo"></a>
-											
-										<!-- Nav -->
-											<nav id="nav">
-												<ul>
-													<li><a href="/vistas">Mi Inicio</a></li>
-													<li>
-														<a href="#">Funcionalidades</a>
-														<ul>
-															<li><a href="#">Modificar datos personales</a></li>
-															<li>
-																<a href="#">Productos y/o servicios</a>
-																<ul>
-																	<li><a href="#">Hacer un pedido de productos y/o servicios</a></li>
-																	<li><a href="#">Visualizar productos y/o servicios</a></li>
-																</ul>
-															</li>
-															</ul>
-													</li>
-													<li><a href="#">Mis órdenes</a></li>
-													<li><a href="/logout">Cerrar Sesión</a></li>
-													
-												</ul>
-											</nav>
-	
-									</div>
-								</header>
-	
-						</div>
+<head>
+	<title>Página principal Admin</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="/resources/assets/css/main.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src=""></script>
+	<script src="/resources/assets/js/jquery.min.js"></script>
+	<script src="/resources/assets/js/jquery.dropotron.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover.css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+		crossorigin="anonymous"></script>
+	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
+
+
+
+</head>
+
+<body class="no-sidebar is-preload">
+	<div id="page-wrapper">
+
+		<!-- Header Wrapper -->
+		<div id="header-wrapper">
+			<div class="container">
+
+				<!-- Header -->
+				<header id="header">
+					<div class="inner">
+
+						<!-- Logo -->
+						<a href="/vistas" id="logo"><img style="width:12%" height="100%"
+								src="/resources/images/logosinnada.png" id="logo"></a>
+
+						<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="/vistas">Mi Inicio</a></li>
+								<li>
+									<a href="#">Funcionalidades</a>
+									<ul>
+										<li><a href="#">Modificar datos personales</a></li>
+										<li>
+											<a href="#">Productos y/o servicios</a>
+											<ul>
+												<li><a href="#">Hacer un pedido de productos y/o servicios</a></li>
+												<li><a href="#">Visualizar productos y/o servicios</a></li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li><a href="#">Mis órdenes</a></li>
+								<li><a href="/logout">Cerrar Sesión</a></li>
+
+							</ul>
+						</nav>
+
 					</div>
-	
-			<!-- Main Wrapper -->
-				<div id="main-wrapper">
-					<div class="wrapper style2">
-						<div class="inner">
-							<div class="container">
-								<div id="content">
+				</header>
 
-									<!-- Content -->
+			</div>
+		</div>
 
-										<article>
-											<header class="major">
-												<h2 style="text-align:center"><%= name %>, aquí puedes revisar tu carrito de compras</h2>
-												
-											</header>
-										
+		<!-- Main Wrapper -->
+		<div id="main-wrapper">
+			<div class="wrapper style2">
+				<div class="inner">
+					<div class="container">
+						<div id="content">
 
-											
-											<section class="container box feature1">
-												<div class="row" style=" display: flex; height:auto; max-width:100%; flex-direction:row;flex-wrap: wrap;align-items:center;">
-												
-													
-												
-													<div class="row">
+							<!-- Content -->
 
-													
-													
-													<div class="col" style="max-height: 30%; max-width:30%; min-height:330px; min-width:330px; border:3px">
-														<section>
-															<div>
-																
-																<header>
-																	<a href=""  class="image featured"><img src="/resources/images/seguridad.png"  class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE; background-color: white;" alt=""/></a>
-																	<h2 style="text-align:center">Ver mi carrito</h2>
-																	
-																	
-																</header>
-															</div>
-															
-														</section>
-														
-														<section>
-															<div>
-																
-																<header>
-																	<a href="/hacerpedido"  class="image featured"><img src="/resources/images/flechaizq.png"  class="btn btn-primary hvr-bob testing" style="border:0px; border-style: outset;border-color:#25D9FE; background-color: white;" alt=""/></a>
-																	<h2 style="text-align:center">Volver atrás</h2>
-																	<p>Haz click en la imagen para volver a los productos</p>
-																	
-																</header>
-															</div>
-															
-														</section>
-
-													</div>
-
-
-													
-											
-													<div class="col" style="margin-top:0; padding-top:0;">
-														<div class="accordion" id="accordionPanelsStayOpenExample" style="margin-top:0;">
-															<div class="accordion-item">
-															  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-																<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" style="background-color:#4890B9;">
-																  Ver Productos
-																</button>
-															  </h2>
-															  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-																<div class="accordion-body">
-																	<table class="table table-striped table-responsive">
-																		<tr>
-																			<th>ID Producto</th>
-																			<th>Nombre</th>
-																			<th>Descripción</th>
-																			<th>Precio</th>
-																			<th>Sección</th>
-																			<th>¿Está deshabilitado?</th>
-																			<th>Habilitar/Deshabilitar</th>
-																		</tr>
-																		<%for (let i=0;i<productos.length;i++){ %>
-																			<tr>
-																				<td><%= productos[i].id %></td>
-																				<td><%= productos[i].nombre %></td>
-																				<td><%= productos[i].descripcion %></td>
-																				<td><%= productos[i].precio %></td>
-																				<td><%= productos[i].seccion %></td>
-																				<td><%if(productos[i].deshabilitado == 0){  %>
-																					<%="Habilitado"%> 
-																					<% } else{ %>
-																					<%="Deshabilitado"%> 
-																					<% } %>  
-																					</td>
-																					<td><button type="button" class="btn gray" data-bs-toggle="modal" data-bs-target="#exampleModal<%= productos[i].id%>" data-bs-whatever="@fat"> <a href=""></a> Habilitar/Deshabilitar</button></td>
-																				</tr>
-															
-																				<div class="modal hide fade in"id="exampleModal<%= productos[i].id%>" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-																					<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-																					  <div class="modal-content" style="border-color:black;">
-																						<div class="modal-header">
-																						  <h5 class="modal-title" style="color:black; text-align:center;"id="exampleModalLabel">Habilitar o deshabilitar producto</h5>
-																						  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-																						</div>
-																						<div class="modal-body">
-																						  <form method="post" action="/editproducto/<%=productos[i].id%>">
-																						
-																							<div class="mb-3">
-																								<select name="option" id="">
-																									<option value="0">Habilitado</option>
-																									<option value="1">Deshabilitado</option>
-																								</select>
-																							</div>
-																							<div class="modal-footer">
-																								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-																								<input type="submit" class="btn gray btn-primary">
-																							  </div>
-																						  </form> 
-																						</div> 
-																					  </div>
-																					</div>
-																				</div>
-																					</tr>
-																			
-																					<script>
-																						$('#exampleModal<%=productos[i].id%>').modal('hide');
-																						$('body').removeClass('modal-open');
-																						$('.modal-backdrop').remove();
-																				   </script>
-
-																			<% } %>
-																</table> 
+							<div class="cart_section">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-lg-10 offset-lg-1">
+											<div class="cart_container">
+												<div class="cart_title">Shopping Cart<small> (1 item in your cart) </small></div>
+												<div class="cart_items">
+													<ul class="cart_list">
+														<li class="cart_item clearfix">
+															<div class="cart_item_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg" alt=""></div>
+															<div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+																<div class="cart_item_name cart_info_col">
+																	<div class="cart_item_title">Name</div>
+																	<div class="cart_item_text">Samsung C7 Pro</div>
 																</div>
-															  </div>
-															</div>
-															<div class="accordion-item">
-																<h2 class="accordion-header" id="panelsStayOpen-headingOne">
-																  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" style="background-color:#4890B9;">
-																	Ver Servicios
-																  </button>
-																</h2>
-																<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-																  <div class="accordion-body">
-																	  <table class="table table-striped">
-																		  <tr>
-																			<th>ID Servicio</th>
-																			<th>nombre</th>
-																			<th>descripcion</th>
-																			<th>precio</th>
-																			<th>sección</th>
-																			<th>¿Está deshabilitado?</th>
-																			<th>Habilitar/Deshabilitar</th>
-																		  </tr>
-																		  <%for (let i=0;i<servicios.length;i++){ %>
-																			  <tr>
-																				<td><%= servicios[i].id %></td>
-																				<td><%= servicios[i].nombre %></td>
-																				<td><%= servicios[i].descripcion %></td>
-																				<td><%= servicios[i].precio %></td>
-																				<td><%= servicios[i].seccion %></td>
-																				<td><%if(servicios[i].deshabilitado == 0){  %>
-																					<%="Habilitado"%> 
-																					<% } else{ %>
-																					<%="Deshabilitado"%> 
-																					<% } %>  
-																					</td>
-																					<td><button type="button" class="btn gray" data-bs-toggle="modal" data-bs-target="#exampleModal<%= servicios[i].id%>" data-bs-whatever="@fat"> <a href=""></a> Habilitar/Deshabilitar</button></td>
-																				</tr>
-															
-																				<div class="modal hide fade in"id="exampleModal<%= servicios[i].id%>" aria-labelledby="exampleModalLabel" aria-hidden="false">
-																					<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-																					  <div class="modal-content" style="border-color:black;background: linear-gradient(180deg, rgba(124,124,124,1) 0%, rgba(251,251,251,1) 100%);">
-																						<div class="modal-header">
-																						  <h5 class="modal-title" style="color:black; text-align:center;"id="exampleModalLabel">Habilitar o deshabilitar servicio</h5>
-																						  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-																						</div>
-																						<div class="modal-body">
-																						  <form method="post" action="/editservicio/<%=servicios[i].id%>">
-																						
-																							<div class="mb-3">
-																								<select name="option" id="">
-																									<option value="0">Habilitado</option>
-																									<option value="1">Deshabilitado</option>
-																								</select>
-																							</div>
-																							<div class="modal-footer">
-																								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-																								<input type="submit" class="btn gray btn-primary">
-																							  </div>
-																						  </form> 
-																						</div> 
-																					  </div>
-																					</div>
-																				</div>
-																					
-																			  <% } %>
-																  </table> 
-																  </div>
+																<div class="cart_item_color cart_info_col">
+																	<div class="cart_item_title">Color</div>
+																	<div class="cart_item_text"><span style="background-color:#999999;"></span>Silver</div>
 																</div>
-															  </div>
-
-															
-														  </div>
+																<div class="cart_item_quantity cart_info_col">
+																	<div class="cart_item_title">Quantity</div>
+																	<div class="cart_item_text">1</div>
+																</div>
+																<div class="cart_item_price cart_info_col">
+																	<div class="cart_item_title">Price</div>
+																	<div class="cart_item_text">₹22000</div>
+																</div>
+																<div class="cart_item_total cart_info_col">
+																	<div class="cart_item_title">Total</div>
+																	<div class="cart_item_text">₹22000</div>
+																</div>
+															</div>
+														</li>
+													</ul>
+												</div>
+												<div class="order_total">
+													<div class="order_total_content text-md-right">
+														<div class="order_total_title">Order Total:</div>
+														<div class="order_total_amount">₹22000</div>
 													</div>
-												
+												</div>
+												<div class="cart_buttons"> <button type="button" class="button cart_button_clear">Continue Shopping</button> <button type="button" class="button cart_button_checkout">Add to Cart</button> </div>
 											</div>
 										</div>
-										</article>
-
+									</div>
 								</div>
 							</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							<article>
+								<header class="major">
+									<h2 style="text-align:center">
+										<%= name %>, aquí puedes revisar tu carrito de compras
+									</h2>
+
+								</header>
+
+
+
+								<section class="container box feature1">
+									<div class="row"
+										style=" display: flex; height:auto; max-width:100%; flex-direction:row;flex-wrap: wrap;align-items:center;">
+
+
+
+										<div class="row">
+
+
+
+											<div class="col"
+												style="max-height: 30%; max-width:30%; min-height:330px; min-width:330px; border:3px">
+												<section>
+													<div>
+
+														<header>
+															<a href="" class="image featured"><img
+																	src="/resources/images/seguridad.png"
+																	class="btn btn-primary hvr-bob testing"
+																	style="border:0px; border-style: outset;border-color:#25D9FE; background-color: white;"
+																	alt="" /></a>
+															<h2 style="text-align:center">Ver mi carrito</h2>
+
+
+														</header>
+													</div>
+
+												</section>
+
+												<section>
+													<div>
+
+														<header>
+															<a href="/hacerpedido" class="image featured"><img
+																	src="/resources/images/flechaizq.png"
+																	class="btn btn-primary hvr-bob testing"
+																	style="border:0px; border-style: outset;border-color:#25D9FE; background-color: white;"
+																	alt="" /></a>
+															<h2 style="text-align:center">Volver atrás</h2>
+															<p>Haz click en la imagen para volver a los productos</p>
+
+														</header>
+													</div>
+
+												</section>
+
+											</div>
+
+
+
+
+											<div class="col" style="margin-top:0; padding-top:0;">
+												<div class="accordion" id="accordionPanelsStayOpenExample"
+													style="margin-top:0;">
+													<div class="accordion-item">
+														<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+															<button class="accordion-button" type="button"
+																data-bs-toggle="collapse"
+																data-bs-target="#panelsStayOpen-collapseOne"
+																aria-expanded="true"
+																aria-controls="panelsStayOpen-collapseOne"
+																style="background-color:#4890B9;">
+																Productos del Carrito
+															</button>
+														</h2>
+														<div id="panelsStayOpen-collapseOne"
+															class="accordion-collapse collapse show"
+															aria-labelledby="panelsStayOpen-headingOne">
+															<div class="accordion-body">
+																<table class="table table-striped table-responsive">
+																	<tr>
+																		<th>ID Producto</th>
+																		<th>Nombre</th>
+																		<th>Descripción</th>
+																		<th>Precio</th>
+																		
+																	</tr>
+																	<%for (let i=0;i<productos.length;i++){ %>
+																		<tr>
+																			<td>
+																				<%= todo[i].idproducto %>
+																			</td>
+																			<td>
+																				<%= resultadosProductos[i].nombre %>
+																			</td>
+																			<td>
+																				<%= resultadosProductos[i].descripcion %>
+																			</td>
+																			<td>
+																				<%= resultadosProductos[i].precio %>
+																			</td>
+																			
+																			
+																		</tr>
+
+																		<div class="modal hide fade in"
+																			id="exampleModal<%= productos[i].id%>"
+																			tabindex="-1"
+																			aria-labelledby="exampleModalLabel"
+																			aria-hidden="true">
+																			<div
+																				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+																				<div class="modal-content"
+																					style="border-color:black;">
+																					<div class="modal-header">
+																						<h5 class="modal-title"
+																							style="color:black; text-align:center;"
+																							id="exampleModalLabel">
+																							Habilitar o deshabilitar
+																							producto</h5>
+																						<button type="button"
+																							class="btn-close"
+																							data-bs-dismiss="modal"
+																							aria-label="Close"></button>
+																					</div>
+																					<div class="modal-body">
+																						<form method="post"
+																							action="/editproducto/<%=productos[i].id%>">
+
+																							<div class="mb-3">
+																								<select name="option"
+																									id="">
+																									<option value="0">
+																										Habilitado
+																									</option>
+																									<option value="1">
+																										Deshabilitado
+																									</option>
+																								</select>
+																							</div>
+																							<div class="modal-footer">
+																								<button type="button"
+																									class="btn btn-secondary"
+																									data-bs-dismiss="modal">Cancelar</button>
+																								<input type="submit"
+																									class="btn gray btn-primary">
+																							</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		</tr>
+
+																		<script>
+																			$('#exampleModal<%=productos[i].id%>').modal('hide');
+																			$('body').removeClass('modal-open');
+																			$('.modal-backdrop').remove();
+																		</script>
+
+																		<% } %>
+																</table>
+															</div>
+														</div>
+													</div>
+													<div class="accordion-item">
+														<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+															<button class="accordion-button" type="button"
+																data-bs-toggle="collapse"
+																data-bs-target="#panelsStayOpen-collapseOne"
+																aria-expanded="true"
+																aria-controls="panelsStayOpen-collapseOne"
+																style="background-color:#4890B9;">
+																Ver Servicios
+															</button>
+														</h2>
+														<div id="panelsStayOpen-collapseOne"
+															class="accordion-collapse collapse show"
+															aria-labelledby="panelsStayOpen-headingOne">
+															<div class="accordion-body">
+																<table class="table table-striped">
+																	<tr>
+																		<th>ID Servicio</th>
+																		<th>nombre</th>
+																		<th>descripcion</th>
+																		<th>precio</th>
+																		<th>sección</th>
+																		<th>¿Está deshabilitado?</th>
+																		<th>Habilitar/Deshabilitar</th>
+																	</tr>
+																	<%for (let i=0;i<servicios.length;i++){ %>
+																		<tr>
+																			<td>
+																				<%= servicios[i].id %>
+																			</td>
+																			<td>
+																				<%= servicios[i].nombre %>
+																			</td>
+																			<td>
+																				<%= servicios[i].descripcion %>
+																			</td>
+																			<td>
+																				<%= servicios[i].precio %>
+																			</td>
+																			<td>
+																				<%= servicios[i].seccion %>
+																			</td>
+																			<td>
+																				<%if(servicios[i].deshabilitado==0){ %>
+																					<%="Habilitado"%>
+																						<% } else{ %>
+																							<%="Deshabilitado"%>
+																								<% } %>
+																			</td>
+																			<td><button type="button" class="btn gray"
+																					data-bs-toggle="modal"
+																					data-bs-target="#exampleModal<%= servicios[i].id%>"
+																					data-bs-whatever="@fat"> <a
+																						href=""></a>
+																					Habilitar/Deshabilitar</button></td>
+																		</tr>
+
+																		<div class="modal hide fade in"
+																			id="exampleModal<%= servicios[i].id%>"
+																			aria-labelledby="exampleModalLabel"
+																			aria-hidden="false">
+																			<div
+																				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+																				<div class="modal-content"
+																					style="border-color:black;background: linear-gradient(180deg, rgba(124,124,124,1) 0%, rgba(251,251,251,1) 100%);">
+																					<div class="modal-header">
+																						<h5 class="modal-title"
+																							style="color:black; text-align:center;"
+																							id="exampleModalLabel">
+																							Habilitar o deshabilitar
+																							servicio</h5>
+																						<button type="button"
+																							class="btn-close"
+																							data-bs-dismiss="modal"
+																							aria-label="Close"></button>
+																					</div>
+																					<div class="modal-body">
+																						<form method="post"
+																							action="/editservicio/<%=servicios[i].id%>">
+
+																							<div class="mb-3">
+																								<select name="option"
+																									id="">
+																									<option value="0">
+																										Habilitado
+																									</option>
+																									<option value="1">
+																										Deshabilitado
+																									</option>
+																								</select>
+																							</div>
+																							<div class="modal-footer">
+																								<button type="button"
+																									class="btn btn-secondary"
+																									data-bs-dismiss="modal">Cancelar</button>
+																								<input type="submit"
+																									class="btn gray btn-primary">
+																							</div>
+																						</form>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+
+																		<% } %>
+																</table>
+															</div>
+														</div>
+													</div>
+
+
+												</div>
+											</div>
+
+										</div>
+									</div>
+							</article>
+
 						</div>
 					</div>
-					
-					
+				</div>
+			</div>
 
 
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-			<% if(typeof alert !="undefined"){ %>
+
+			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+			<% if(typeof alert !="undefined" ){ %>
 				<script>
 					Swal.fire({
 						title: "<%= alertTitle %>",
-						alertMessage:"<%= alertMessage %>",
+						alertMessage: "<%= alertMessage %>",
 						icon: "<%=alertIcon%>",
 						showConfirmButton: "<%=showConfirmButton%>",
 						timer: "<%= timer %>"
 					}).then(() => {
-						window.location ="/<%=ruta%>"
+						window.location = "/<%=ruta%>"
 					})
 				</script>
-			<% } %> 
-		
-			
-
-		<!-- Scripts -->
-		
-			<script src="/resources/js/gsap.js"></script>
-			
-			
-			<script src="/resources/assets/js/browser.min.js"></script>
-			<script src="/resources/assets/js/breakpoints.min.js"></script>
-			<script src="/resources/assets/js/util.js"></script>
-			<script src="/resources/assets/js/main.js"></script>
-
-			<script>
-				$('#exampleModal').modal('hide');
-				$('body').removeClass('modal-open');
-				$('.modal-backdrop').remove();
-		   </script>
+				<% } %>
 
 
 
-	</body>
+					<!-- Scripts -->
+
+					<script src="/resources/js/gsap.js"></script>
+
+
+					<script src="/resources/assets/js/browser.min.js"></script>
+					<script src="/resources/assets/js/breakpoints.min.js"></script>
+					<script src="/resources/assets/js/util.js"></script>
+					<script src="/resources/assets/js/main.js"></script>
+
+					<script>
+						$('#exampleModal').modal('hide');
+						$('body').removeClass('modal-open');
+						$('.modal-backdrop').remove();
+					</script>
+
+
+
+</body>
+
 </html>

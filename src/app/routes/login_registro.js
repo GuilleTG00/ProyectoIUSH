@@ -142,16 +142,24 @@ module.exports = app => {
                 if (error) {
                     res.send(error);
                 } else {
-                    res.render("../views/carrito.ejs", {
-                        conexion:results5,
-                        name: req.session.name,
-                        alert: true,
-                        alertTitle: "Agregado exitosamente",
-                        alertMessage: "¡Agregado exitosamente!",
-                        alertIcon: "success",
-                        showConfirmButton: false,
-                        timer: 1500,
-                        ruta: ""
+                    connection.query('SELECT * FROM productos', (err, resProdMostrar) => {
+
+                        connection.query('SELECT * FROM servicios', (err, resSerMostrar) => {
+                            res.render("../views/hacerpedido.ejs", {
+                                productos: resProdMostrar,
+                                servicios: resSerMostrar,
+                                name: req.session.name,
+                                id:req.session.id_element,
+                                alert: true,
+                                alertTitle: "Producto agregado",
+                                alertMessage: "Producto agregado al carrito",
+                                alertIcon: "success",
+                                showConfirmButton: true,
+                                timer: false,
+                                ruta: "hacerpedido"
+                            })
+        
+                        })
                     })
                 }
             });
@@ -166,15 +174,61 @@ module.exports = app => {
 
         });
         });
-        /*
-        const query = `
+        
+        app.get('/carrito', (req, res) => {
+            
+            const queryproductos = `
                 SELECT * FROM carrito
                     JOIN carritoaux
                     ON carritoaux.idcarrito = carrito.id
                     JOIN cliente ON carrito.idcliente = cliente.id_element 
                         WHERE id_element = ?`; //AND carrito.state = 'ACTIVE'
+             const joinproductos = `
+                SELECT * FROM carritoaux
+                    JOIN productos
+                        ON carritoaux.idproducto = productos.id
+                     JOIN cliente ON carritoaux.idcliente = cliente.id_element 
+                        WHERE id_element = ?`;
 
-
+             const queryservicios = `
+                SELECT * FROM carrito
+                    JOIN carritoser
+                    ON carritoser.idcarrito = carrito.id
+                    JOIN cliente ON carrito.idcliente = cliente.id_element 
+                        WHERE id_element = ?`; //AND carrito.state = 'ACTIVE'
+            if (req.session.loggedin && req.session.rol == "cliente") {
+                connection.query(queryproductos,[req.session.id_element], (err, resultadotodo) => {
+                    console.log(resultadotodo);
+                    let vacio=[];
+                    for (let b=0;b<resultadotodo.length;b++) {
+                        vacio[b]=resultadotodo[b].idproducto;
+                    }
+                    console.log(vacio);
+                    connection.query(joinproductos,[req.session.id_element], (err, resultadosProductos) => {
+                        console.log(resultadosProductos);
+                        res.render("../views/carrito.ejs", {
+                            todo:resultadotodo,
+                            productos:vacio,
+                            resultadosProductos:resultadosProductos,
+                            servicios: vacio,
+                            name: req.session.name
+                        })
+    
+                    })
+                    
+                })
+            } else {
+                res.render("../views/index.ejs", {
+                    login: false,
+                    name: "por favor inicie sesión"
+                });
+            }
+    
+        });    
+        
+        
+        
+/*
 
         connection.query(query, [idcliente]
             , (error, results4) => {
@@ -716,7 +770,7 @@ app.get("/serviciocarrito/:id", (req, res) => {
 
     app.post("/modificar-datos-cliente", async (req, res) => {
         console.log(req.body);
-        console.log(req.session.idd)
+        console.log(req.session.id_element)
         const { user, pass, nombre, apellido, telefono, email } = req.body;
 
         let sql = "";
