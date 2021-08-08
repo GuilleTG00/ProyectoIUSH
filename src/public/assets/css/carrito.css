@@ -93,13 +93,13 @@ ul {
 }
 
 .cart_item_title {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.5)
 }
 
 .cart_item_text {
-    font-size: 18px;
+    font-size: 19px;
     margin-top: 35px
 }
 
@@ -137,14 +137,14 @@ ul {
 
 .order_total_title {
     display: inline-block;
-    font-size: 14px;
+    font-size: 20px;
     color: rgba(0, 0, 0, 0.5);
     line-height: 60px
 }
 
 .order_total_amount {
     display: inline-block;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 500;
     margin-left: 26px;
     line-height: 60px
