@@ -196,6 +196,14 @@ module.exports = app => {
                     ON carritoser.idcarrito = carrito.id
                     JOIN cliente ON carrito.idcliente = cliente.id_element 
                         WHERE id_element = ?`; //AND carrito.state = 'ACTIVE'
+
+             const joinservicios = `
+                SELECT * FROM carritoser
+                    JOIN servicios
+                        ON carritoser.idservicio = servicios.id
+                     JOIN cliente ON carritoser.idcliente = cliente.id_element 
+                        WHERE id_element = ?`;
+
             if (req.session.loggedin && req.session.rol == "cliente") {
                 connection.query(queryproductos,[req.session.id_element], (err, resultadotodo) => {
                     console.log(resultadotodo);
@@ -204,19 +212,35 @@ module.exports = app => {
                         vacio[b]=resultadotodo[b].idproducto;
                     }
                     console.log(vacio);
+
+                    connection.query(queryservicios,[req.session.id_element], (err, resultadotodoser) => {
+                        console.log(resultadotodoser);
+                        let vacio1=[];
+                        for (let n=0;n<resultadotodoser.length;n++) {
+                            vacio1[n]=resultadotodo[n].idservicio;
+                        }
+                        
+                    connection.query(joinservicios,[req.session.id_element], (err, resultadosServicios) => {
+                        
+                       
+    
+                    
                     connection.query(joinproductos,[req.session.id_element], (err, resultadosProductos) => {
                         console.log(resultadosProductos);
                         res.render("../views/carrito.ejs", {
                             todo:resultadotodo,
                             productos:vacio,
+                            servicios:vacio1,
                             resultadosProductos:resultadosProductos,
-                            servicios: vacio,
+                            resultadosServicios:resultadosServicios,
                             name: req.session.name
                         })
     
                     })
                     
                 })
+            });
+        });
             } else {
                 res.render("../views/index.ejs", {
                     login: false,
@@ -225,7 +249,106 @@ module.exports = app => {
             }
     
         });    
-        
+        app.get("/eliminarcarritoproducto/:id", (req, res) => {
+            const IDproducto = req.params.id;
+            const idcliente = req.session.id_element;
+            const queryborrado = `DELETE FROM carritoaux
+                                  WHERE id = ? AND idcliente = ?
+                                  LIMIT ?`; 
+           
+                         connection.query(queryborrado,[IDproducto,,idcliente,`1`], (err, resSerMostrar) => {
+                                const queryproductos = `
+                                SELECT * FROM carrito
+                                    JOIN carritoaux
+                                    ON carritoaux.idcarrito = carrito.id
+                                    JOIN cliente ON carrito.idcliente = cliente.id_element 
+                                        WHERE id_element = ?`; //AND carrito.state = 'ACTIVE'
+                             const joinproductos = `
+                                SELECT * FROM carritoaux
+                                    JOIN productos
+                                        ON carritoaux.idproducto = productos.id
+                                     JOIN cliente ON carritoaux.idcliente = cliente.id_element 
+                                        WHERE id_element = ?`;
+                
+                             const queryservicios = `
+                                SELECT * FROM carrito
+                                    JOIN carritoser
+                                    ON carritoser.idcarrito = carrito.id
+                                    JOIN cliente ON carrito.idcliente = cliente.id_element 
+                                        WHERE id_element = ?`; //AND carrito.state = 'ACTIVE'
+                
+                             const joinservicios = `
+                                SELECT * FROM carritoser
+                                    JOIN servicios
+                                        ON carritoser.idservicio = servicios.id
+                                     JOIN cliente ON carritoser.idcliente = cliente.id_element 
+                                        WHERE id_element = ?`;
+                
+                            if (req.session.loggedin && req.session.rol == "cliente") {
+                                connection.query(queryproductos,[req.session.id_element], (err, resultadotodo) => {
+                                    console.log(resultadotodo);
+                                    let vacio=[];
+                                    for (let b=0;b<resultadotodo.length;b++) {
+                                        vacio[b]=resultadotodo[b].idproducto;
+                                    }
+                                    console.log(vacio);
+                
+                                    connection.query(queryservicios,[req.session.id_element], (err, resultadotodoser) => {
+                                        console.log(resultadotodoser);
+                                        let vacio1=[];
+                                        for (let n=0;n<resultadotodoser.length;n++) {
+                                            vacio1[n]=resultadotodo[n].idservicio;
+                                        }
+                                        
+                                    connection.query(joinservicios,[req.session.id_element], (err, resultadosServicios) => {
+                                        
+                                       
+                    
+                                    
+                                    connection.query(joinproductos,[req.session.id_element], (err, resultadosProductos) => {
+                                        console.log(resultadosProductos);
+                                        res.render("../views/carrito.ejs", {
+                                            todo:resultadotodo,
+                                            productos:vacio,
+                                            servicios:vacio1,
+                                            resultadosProductos:resultadosProductos,
+                                            resultadosServicios:resultadosServicios,
+                                            name: req.session.name,
+                                            alert: true,
+                                            alertTitle: "Producto eliminado del carrito",
+                                            alertMessage: "Producto eliminado del carrito",
+                                            alertIcon: "success",
+                                            showConfirmButton: true,
+                                            timer: false,
+                                            ruta: "carrito"
+                                        })
+                    
+                    
+                                    })
+                                    
+                                })
+                            });
+                        });
+                            } else {
+                                res.render("../views/index.ejs", {
+                                    login: false,
+                                    name: "por favor inicie sesión"
+                                });
+                            }
+                    
+                                
+                                
+                                
+                            })
+                        });
+    
+                
+    
+    
+    
+    
+    
+    
         
         
 /*

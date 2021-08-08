@@ -142,36 +142,6 @@
 
 		<!-- Scripts -->
 
-<script>
-  let productos=[];
-  let total=0;
-  let servicios=[];
-  
-  function agregar(id,precio,tipo){
-    var producto={
-      id:id,
-      precio:precio,
-      tipo:tipo,
-    }
-      console.log(id,precio);
-	  if (tipo == "producto"){
-		productos.push(producto);
-	  }else if (tipo == "servicio"){
-		  servicios.push(producto);
-	  }
-      
-      total=total+precio;
-	  console.log(total);
-      console.log(productos);
-	  console.log(servicios);
-	  return (productos,servicios);
-  document.getElementById("carrito").innerHTML= `Pagar $${total}`
-  }
-
-
-
-</script>
-
 
 
 			<script src="/resources/assets/js/jquery.min.js"></script>
