@@ -512,9 +512,11 @@ module.exports = app => {
         if (err){
             res.send(err);
         }else{
-            res.render("../views/vistas.ejs", {
-                
+            res.render("../views/vistacliente.ejs", {
+                login: true,
                 name: req.session.name,
+                rol: req.session.rol,
+                id: req.session.id_element,
                 alert: true,
                 alertTitle: "¡Compra exitosa!",
                 alertMessage: "¡Compra exitosa!",
