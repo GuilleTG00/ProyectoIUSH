@@ -299,7 +299,7 @@ module.exports = app => {
                         console.log(resultadotodoser);
                         let vacio1=[];
                         for (let n=0;n<resultadotodoser.length;n++) {
-                            vacio1[n]=resultadotodo[n].idservicio;
+                            vacio1[n]=resultadotodoser[n].idservicio;
                         }
                         
                     connection.query(joinservicios,[req.session.id_element], (err, resultadosServicios) => {
