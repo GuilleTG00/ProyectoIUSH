@@ -132,7 +132,7 @@ module.exports = app => {
         const IDproducto = req.params.id;
         const idcliente = req.session.id_element;
         
-        connection.query("SELECT * FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
+        connection.query("SELECT MAX(id) as id FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
             console.log(req.session);
             console.log(result2);
             let idcarritotest =result2[0].id;
@@ -145,7 +145,7 @@ module.exports = app => {
                     if (error) {
                         res.send(error);
                     };
-                    connection.query("SELECT * FROM carrito where idcliente = ?",[idcliente],(error, results) =>{
+                    connection.query("SELECT MAX(id) as id FROM carrito where idcliente = ?",[idcliente],(error, results) =>{
                         idcarritotest=result2.id; });
                     //Consulto el número de factura del usuario SELECT * FROM factura WHERE id_uyser = ?
                 });
@@ -196,7 +196,7 @@ module.exports = app => {
             const IDproducto = req.params.id;
             const idcliente = req.session.id_element;
             
-            connection.query("SELECT * FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
+            connection.query("SELECT MAX(id) AS id FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
                 console.log(req.session);
                 console.log(result2);
                 let idcarritotest =result2[0].id;
@@ -209,7 +209,7 @@ module.exports = app => {
                         if (error) {
                             res.send(error);
                         };
-                        connection.query("SELECT * FROM carrito where idcliente = ?",[idcliente],(error, results) =>{
+                        connection.query("SELECT MAX(id) AS id carrito where idcliente = ?",[idcliente],(error, results) =>{
                             idcarritotest=result2.id; });
                         //Consulto el número de factura del usuario SELECT * FROM factura WHERE id_uyser = ?
                     });
@@ -496,17 +496,28 @@ module.exports = app => {
         const idcliente = req.session.id_element;
         const {idproducto,descripcionproducto,precio,idservicio,descripcionservicio,precioservicios,preciototal} = req.body
         console.log(req.body);
-        connection.query("INSERT into facturafinal SET idProducto = ? idCliente = ? idServicio = ? total = ?",[idproducto,idcliente,idservicio,preciototal],
+        connection.query("SELECT MAX(id) AS id FROM carrito WHERE idcliente = ?",[idcliente],(error, results) =>{
+            if (error){
+                res.send(error);
+            }else{
+                let maximoid=results[0].id;
+            connection.query("UPDATE carrito SET total = ? WHERE id = ? ",[preciototal,maximoid],(err,result) => {
+                if (err){
+                    res.send(err);
+                }
+            })
+            
+            connection.query("INSERT into carrito SET idcliente = ?",[idcliente],
         (err, result) => {
         if (err){
             res.send(err);
         }else{
-            res.render("../views/carrito.ejs", {
-                conexion:results5,
+            res.render("../views/vistas.ejs", {
+                
                 name: req.session.name,
                 alert: true,
-                alertTitle: "Agregado exitosamente",
-                alertMessage: "¡Agregado exitosamente!",
+                alertTitle: "¡Compra exitosa!",
+                alertMessage: "¡Compra exitosa!",
                 alertIcon: "success",
                 showConfirmButton: false,
                 timer: 1500,
@@ -515,6 +526,10 @@ module.exports = app => {
         }
         
         })
+        }
+    });
+        
+        
     })
 
 
