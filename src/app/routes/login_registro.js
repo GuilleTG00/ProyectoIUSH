@@ -128,6 +128,55 @@ module.exports = app => {
 
     });
 
+    app.get('/vermispedidos', (req, res) => {
+        const idcliente = req.session.id_element;
+        if (req.session.loggedin && req.session.rol == "cliente") {
+           
+
+                connection.query('SELECT * FROM carrito WHERE idcliente = ?',[idcliente], (err, resultadofinal) => {
+                    res.render("../views/vermispedidos.ejs", {
+                        resultadofinal:resultadofinal,
+                        name: req.session.name,
+                        id:req.session.id_element
+                    })
+
+                })
+            
+
+        } else {
+            res.render("../views/index.ejs", {
+                login: false,
+                name: "por favor inicie sesión"
+            });
+        }
+
+    });
+
+    app.get('/vertodospedidos', (req, res) => {
+        const idcliente = req.session.id_element;
+        if (req.session.loggedin && (req.session.rol == "administrador" || req.session.rol == "vendedor")) {
+           
+
+                connection.query('SELECT * FROM carrito', (err, resultadofinal) => {
+                    res.render("../views/vertodospedidos.ejs", {
+                        resultadofinal:resultadofinal,
+                        name: req.session.name,
+                        id:req.session.id_element
+                    })
+
+                })
+            
+
+        } else {
+            res.render("../views/index.ejs", {
+                login: false,
+                name: "por favor inicie sesión"
+            });
+        }
+
+    });
+
+
     app.get("/productocarrito/:id", (req, res) => {
         const IDproducto = req.params.id;
         const idcliente = req.session.id_element;
@@ -468,6 +517,9 @@ module.exports = app => {
     })
 */
 
+    
+
+
     app.get('/habilitardeshabilitar', (req, res) => {
         if (req.session.loggedin && req.session.rol == "administrador") {
             connection.query('SELECT * FROM productos', (err, result1) => {
@@ -654,7 +706,7 @@ module.exports = app => {
                 id: req.session.id
             });
         } else if (req.session.loggedin && req.session.rol == "vendedor") {
-            res.render("../views/gestionaraplicacion.ejs", {
+            res.render("../views/gestionaraplicacionv.ejs", {
                 login: true,
                 name: req.session.name,
                 rol: req.session.rol,
