@@ -89,7 +89,7 @@
 									<div class="row" style="padding-top:0">
 
 										
-											<div class="cart_section" style="width:100%;">
+											<div class="cart_section" style="width:150%;">
 												<div class="container-fluid">
 													<div class="row">
 														<div class="col-lg-10 offset-lg-1">
@@ -97,27 +97,27 @@
 																<div class="cart_title"><h2>Carrito de compras</h2><small> (<%=productos.length + servicios.length%> elementos en tu carrito)</small></div>
 																<div class="cart_items">
 																	<div class="accordion-body">
-																	
+																		<form method="POST" action="carrito">
 																	<% let total = productos.length + servicios.length  %> 
 																	<% let acumulado = 0  %> 
 																	<% for (let z=0;z<productos.length;z++) { %> 
-																	<ul class="cart_list">
+																	<ul class="cart_list" style="width: 100%;">
 																		
 																		<li class="cart_item clearfix table table-striped table-responsive">
 																			<div class="cart_item_image"><img src="/resources/images/Tecnologiaproductos.jpg" alt=""></div>
 																			<div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
 																				<div class="cart_item_name cart_info_col">
 																					<div class="cart_item_title">ID Del producto</div>
-																					<div class="cart_item_text"><%= resultadosProductos[z].id  %> </div>
+																					<div class="cart_item_text"><input style="width:50%;text-align:center" type="text" readonly name="idproducto" value="<%=resultadosProductos[z].id%>"></input></div>
 																				</div>
 																				<div class="cart_item_color cart_info_col">
 																					<div class="cart_item_title">Descripción del producto</div>
-																					<div class="cart_item_text"><%= resultadosProductos[z].descripcion  %></div>
+																					<div class="cart_item_text"><input type="text" name="descripcionproducto" readonly value="<%=resultadosProductos[z].descripcion%>"></input></div>
 																				</div>
 																				
 																				<div class="cart_item_price cart_info_col">
-																					<div class="cart_item_title">Precio</div>
-																					<div class="cart_item_text"><%= resultadosProductos[z].precio  %></div>
+																					<div class="cart_item_title" style="text-align:center">Precio</div>
+																					<div class="cart_item_text"><input type="text" name="precio" style="width:80%;text-align:center" readonly value="<%=resultadosProductos[z].precio%>"></input></div>
 																				</div>
 																				<div class="cart_item_total cart_info_col">
 																					<div class="cart_item_title">Eliminar producto</div>
@@ -137,16 +137,16 @@
 																					<div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
 																						<div class="cart_item_name cart_info_col">
 																							<div class="cart_item_title">ID Del Servicio</div>
-																							<div class="cart_item_text"><%= resultadosServicios[z].id  %> </div>
+																							<div class="cart_item_text"><input type="text" name="idservicio" style="width:80%;text-align:center" readonly value="<%= resultadosServicios[z].id  %>"> </div>
 																						</div>
 																						<div class="cart_item_color cart_info_col">
 																							<div class="cart_item_title">Descripción del servicio</div>
-																							<div class="cart_item_text"><%=resultadosServicios[z].descripcion%></div>
+																							<div class="cart_item_text"><input style="width:50%;text-align:center" type="text" readonly name="descripcionservicio" value="<%=resultadosServicios[z].descripcion%>"></input></div>
 																						</div>
 																						
 																						<div class="cart_item_price cart_info_col">
 																							<div class="cart_item_title">Precio</div>
-																							<div class="cart_item_text"><%= resultadosServicios[z].precio  %></div>
+																							<div class="cart_item_text"><input type="text" name="precioservicios" style="width:80%;text-align:center" readonly value="<%= resultadosServicios[z].precio  %>"></div>
 																						</div>
 																						<div class="cart_item_total cart_info_col">
 																							<div class="cart_item_title">Eliminar Servicio</div>
@@ -164,12 +164,13 @@
 																<div class="order_total">
 																	<div class="order_total_content text-md-right">
 																		<div class="order_total_title">Total de la compra:</div>
-																		<div class="order_total_amount"><%=acumulado%> </div>
+																		<div class="order_total_amount"><input type="text" name="preciototal" style="width:80%;text-align:center" readonly value="<%=acumulado%>"> </div>
 																	</div>
 																</div>
+																
 																<div class="cart_buttons"> 
 																	<a class="btn btn-primary" style="margin-right:50px; margin-bottom:30px;" href="/hacerpedido">Seguir Comprando</a>
-																	<a class="btn btn-primary" style=" margin-right:50px;margin-bottom:30px; "href="/misordenes">¡Comprar ahora!</a>
+																	<a class="btn btn-primary" style=" margin-right:50px;margin-bottom:30px;"><button type="submit">¡Comprar ahora!</button></a>
 																	 </div>
 															</div>
 														</div>
@@ -178,7 +179,7 @@
 											</div>
 											
 										</div>
-										
+										</form>
 									<div style="display:flex;flex-direction:row; justify-content:center;align-items:center">
 										<div class="col-4 col-12-medium" style="padding-top:7%">
 											<section>

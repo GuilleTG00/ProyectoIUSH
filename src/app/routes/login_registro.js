@@ -60,7 +60,24 @@ module.exports = app => {
                 name: "por favor inicie sesión"
             });
         }
+        if (req.session.loggedin && req.session.rol == "vendedor") {
+            connection.query('SELECT * FROM productos', (err, result1) => {
 
+                connection.query("SELECT * FROM servicios", (err, result2) => {
+                    res.render("../views/agregareliminar.ejs", {
+                        productos: result1,
+                        servicios: result2,
+                        name: req.session.name
+                    })
+
+                })
+            })
+        } else {
+            res.render("../views/index.ejs", {
+                login: false,
+                name: "por favor inicie sesión"
+            });
+        }
     });
 
     app.get('/verproser', (req, res) => {
@@ -174,7 +191,72 @@ module.exports = app => {
 
         });
         });
-        
+
+        app.get("/serviciocarrito/:id", (req, res) => {
+            const IDproducto = req.params.id;
+            const idcliente = req.session.id_element;
+            
+            connection.query("SELECT * FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
+                console.log(req.session);
+                console.log(result2);
+                let idcarritotest =result2[0].id;
+                console.log(result2.id);
+                console.log("final");
+                //Puedo tener el id del carrito (factura) desde aquí en result2.id_carrito
+                if (result2.length === 0) {
+                    connection.query("INSERT INTO carrito SET ?", { idcliente: idcliente },
+                    (error, results3) => {
+                        if (error) {
+                            res.send(error);
+                        };
+                        connection.query("SELECT * FROM carrito where idcliente = ?",[idcliente],(error, results) =>{
+                            idcarritotest=result2.id; });
+                        //Consulto el número de factura del usuario SELECT * FROM factura WHERE id_uyser = ?
+                    });
+                    
+    
+                    //Guardado el idCarrito (Fatura)
+                };
+                
+                
+                connection.query("INSERT INTO carritoser SET ?",{idservicio:IDproducto,idcarrito:idcarritotest,idcliente:idcliente},(error, results5) =>{
+                    if (error) {
+                        res.send(error);
+                    } else {
+                        connection.query('SELECT * FROM productos', (err, resProdMostrar) => {
+    
+                            connection.query('SELECT * FROM servicios', (err, resSerMostrar) => {
+                                res.render("../views/hacerpedido.ejs", {
+                                    productos: resProdMostrar,
+                                    servicios: resSerMostrar,
+                                    name: req.session.name,
+                                    id:req.session.id_element,
+                                    alert: true,
+                                    alertTitle: "Producto agregado",
+                                    alertMessage: "Producto agregado al carrito",
+                                    alertIcon: "success",
+                                    showConfirmButton: true,
+                                    timer: false,
+                                    ruta: "hacerpedido"
+                                })
+            
+                            })
+                        })
+                    }
+                });
+               
+    
+                //Redirija a /hacerpedido
+    
+    
+    
+    
+    
+    
+            });
+            });
+
+
         app.get('/carrito', (req, res) => {
             
             const queryproductos = `
@@ -385,61 +467,7 @@ module.exports = app => {
 
     })
 */
-app.get("/serviciocarrito/:id", (req, res) => {
-    const IDproducto = req.params.id;
-    const idcliente = req.session.id_element;
-    
-    connection.query("SELECT * FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
-        console.log(req.session);
-        console.log(result2);
-        let idcarritotest =result2[0].id;
-        console.log(result2.id);
-        console.log("final");
-        //Puedo tener el id del carrito (factura) desde aquí en result2.id_carrito
-        if (result2.length === 0) {
-            connection.query("INSERT INTO carrito SET ?", { idcliente: idcliente },
-            (error, results3) => {
-                if (error) {
-                    res.send(error);
-                };
-                connection.query("SELECT * FROM carrito where idcliente = ?",[idcliente],(error, results) =>{
-                    idcarritotest=result2.id; });
-                //Consulto el número de factura del usuario SELECT * FROM factura WHERE id_uyser = ?
-            });
-            
 
-            //Guardado el idCarrito (Fatura)
-        };
-        
-        
-        connection.query("INSERT INTO carritoser SET ?",{idservicio:IDproducto,idcarrito:idcarritotest,idcliente:idcliente},(error, results5) =>{
-            if (error) {
-                res.send(error);
-            } else {
-                res.render("../views/carrito.ejs", {
-                    conexion:results5,
-                    name: req.session.name,
-                    alert: true,
-                    alertTitle: "Agregado exitosamente",
-                    alertMessage: "¡Agregado exitosamente!",
-                    alertIcon: "success",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    ruta: ""
-                })
-            }
-        });
-       
-
-        //Redirija a /hacerpedido
-
-
-
-
-
-
-    });
-    });
     app.get('/habilitardeshabilitar', (req, res) => {
         if (req.session.loggedin && req.session.rol == "administrador") {
             connection.query('SELECT * FROM productos', (err, result1) => {
@@ -461,6 +489,35 @@ app.get("/serviciocarrito/:id", (req, res) => {
         }
 
     });
+
+
+    app.post("/carrito", (req, res) => {
+        const ID = req.params.ID;
+        const idcliente = req.session.id_element;
+        const {idproducto,descripcionproducto,precio,idservicio,descripcionservicio,precioservicios,preciototal} = req.body
+        console.log(req.body);
+        connection.query("INSERT into facturafinal SET idProducto = ? idCliente = ? idServicio = ? total = ?",[idproducto,idcliente,idservicio,preciototal],
+        (err, result) => {
+        if (err){
+            res.send(err);
+        }else{
+            res.render("../views/carrito.ejs", {
+                conexion:results5,
+                name: req.session.name,
+                alert: true,
+                alertTitle: "Agregado exitosamente",
+                alertMessage: "¡Agregado exitosamente!",
+                alertIcon: "success",
+                showConfirmButton: false,
+                timer: 1500,
+                ruta: ""
+            })
+        }
+        
+        })
+    })
+
+
 
     app.post("/editservicio/:ID", (req, res) => {
         const ID = req.params.ID;
@@ -519,11 +576,14 @@ app.get("/serviciocarrito/:id", (req, res) => {
             })
 
         } else if (req.session.loggedin && req.session.rol == "vendedor") {
+            connection.query("SELECT * FROM vendedor WHERE id = ?", [req.session.id], (err, result) => {
             res.render("../views/modificardatosvendedor.ejs", {
                 login: true,
+                admin:result,
                 name: req.session.name,
                 rol: req.session.rol,
                 id: req.session.id
+            })
             });
 
         } else {
@@ -542,12 +602,20 @@ app.get("/serviciocarrito/:id", (req, res) => {
                 rol: req.session.rol,
                 id: req.session.id
             });
+        } else if (req.session.loggedin && req.session.rol == "vendedor") {
+            res.render("../views/manejarcatalogo.ejs", {
+                login: true,
+                name: req.session.name,
+                rol: req.session.rol,
+                id: req.session.id
+            });
+
         } else {
             res.render("../views/index.ejs", {
                 login: false,
                 name: "por favor inicie sesión"
             });
-        }
+        } 
     });
 
     app.get('/', (req, res) => {
@@ -568,12 +636,20 @@ app.get("/serviciocarrito/:id", (req, res) => {
                 rol: req.session.rol,
                 id: req.session.id
             });
+        } else if (req.session.loggedin && req.session.rol == "vendedor") {
+            res.render("../views/gestionaraplicacion.ejs", {
+                login: true,
+                name: req.session.name,
+                rol: req.session.rol,
+                id: req.session.id
+            });
         } else {
             res.render("../views/index.ejs", {
                 login: false,
                 name: "por favor inicie sesión"
             });
-        }
+        } 
+            
     });
 
     app.get('/administrarvendedores', (req, res) => {
@@ -792,7 +868,7 @@ app.get("/serviciocarrito/:id", (req, res) => {
                     if (error) {
                         res.send(error);
                     } else {
-                        if (results.length === 0 || !(pass === result[0].passwordd)) {
+                        if (results.length === 0 || !(await bcryptjs.compare(pass, results[0].password))) {
                             //SWAL2 para errores
                             res.render("../views/logueo.ejs", {
                                 alert: true,
@@ -867,6 +943,48 @@ app.get("/serviciocarrito/:id", (req, res) => {
             })
         }
     })
+
+    app.post("/modificar-datosvend", async (req, res) => {
+        console.log(req.body);
+        console.log(req.session.idd)
+        const { user, pass, nombre, apellido, telefono, email } = req.body;
+
+        let sql = "";
+        let lista = [user, nombre, pass, apellido, telefono, email];
+        let listaDepurada = [];
+        for (let z = 0; z < lista.length; z++) {
+            if (lista[z] != null || lista[z] != '') {
+                listaDepurada.push(lista[z]);
+            }
+        }
+        let tablas = ["user", "nombre", "passwordd", "appellido", "telefono", "email"]
+        for (let i = 0; i < listaDepurada.length; i++) {
+            console.log(listaDepurada[i]);
+            let data = [lista[i], req.session.idd]
+            let valor = tablas[i];
+
+            sql = `UPDATE administrador SET ? WHERE id = ?`;
+            connection.query("UPDATE administrador SET " + valor + " = ? WHERE id = ?", [listaDepurada[i], req.session.idd], async (error, results) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    res.render("../views/index.ejs", {
+                        alert: true,
+                        alertTitle: "Modificación de datos exitosa",
+                        alertMessage: "Modificación exitosa",
+                        alertIcon: "sucess",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        ruta: "/logout"
+
+                    })
+                }
+
+            })
+        }
+    })
+
+    
 
     app.get("/deletevendedor/:id", (req, res) => {
         const id = req.params.id;
