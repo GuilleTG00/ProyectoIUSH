@@ -128,11 +128,60 @@ module.exports = app => {
 
     });
 
+    app.get('/vermispedidos', (req, res) => {
+        const idcliente = req.session.id_element;
+        if (req.session.loggedin && req.session.rol == "cliente") {
+           
+
+                connection.query('SELECT * FROM carrito WHERE idcliente = ?',[idcliente], (err, resultadofinal) => {
+                    res.render("../views/vermispedidos.ejs", {
+                        resultadofinal:resultadofinal,
+                        name: req.session.name,
+                        id:req.session.id_element
+                    })
+
+                })
+            
+
+        } else {
+            res.render("../views/index.ejs", {
+                login: false,
+                name: "por favor inicie sesión"
+            });
+        }
+
+    });
+
+    app.get('/vertodospedidos', (req, res) => {
+        const idcliente = req.session.id_element;
+        if (req.session.loggedin && (req.session.rol == "administrador" || req.session.rol == "vendedor")) {
+           
+
+                connection.query('SELECT * FROM carrito', (err, resultadofinal) => {
+                    res.render("../views/vertodospedidos.ejs", {
+                        resultadofinal:resultadofinal,
+                        name: req.session.name,
+                        id:req.session.id_element
+                    })
+
+                })
+            
+
+        } else {
+            res.render("../views/index.ejs", {
+                login: false,
+                name: "por favor inicie sesión"
+            });
+        }
+
+    });
+
+
     app.get("/productocarrito/:id", (req, res) => {
         const IDproducto = req.params.id;
         const idcliente = req.session.id_element;
         
-        connection.query("SELECT * FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
+        connection.query("SELECT MAX(id) as id FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
             console.log(req.session);
             console.log(result2);
             let idcarritotest =result2[0].id;
@@ -145,7 +194,7 @@ module.exports = app => {
                     if (error) {
                         res.send(error);
                     };
-                    connection.query("SELECT * FROM carrito where idcliente = ?",[idcliente],(error, results) =>{
+                    connection.query("SELECT MAX(id) as id FROM carrito where idcliente = ?",[idcliente],(error, results) =>{
                         idcarritotest=result2.id; });
                     //Consulto el número de factura del usuario SELECT * FROM factura WHERE id_uyser = ?
                 });
@@ -196,7 +245,7 @@ module.exports = app => {
             const IDproducto = req.params.id;
             const idcliente = req.session.id_element;
             
-            connection.query("SELECT * FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
+            connection.query("SELECT MAX(id) AS id FROM carrito WHERE idcliente = ?", [idcliente], (err, result2) => {
                 console.log(req.session);
                 console.log(result2);
                 let idcarritotest =result2[0].id;
@@ -209,7 +258,7 @@ module.exports = app => {
                         if (error) {
                             res.send(error);
                         };
-                        connection.query("SELECT * FROM carrito where idcliente = ?",[idcliente],(error, results) =>{
+                        connection.query("SELECT MAX(id) AS id carrito where idcliente = ?",[idcliente],(error, results) =>{
                             idcarritotest=result2.id; });
                         //Consulto el número de factura del usuario SELECT * FROM factura WHERE id_uyser = ?
                     });
@@ -468,6 +517,9 @@ module.exports = app => {
     })
 */
 
+    
+
+
     app.get('/habilitardeshabilitar', (req, res) => {
         if (req.session.loggedin && req.session.rol == "administrador") {
             connection.query('SELECT * FROM productos', (err, result1) => {
@@ -496,17 +548,30 @@ module.exports = app => {
         const idcliente = req.session.id_element;
         const {idproducto,descripcionproducto,precio,idservicio,descripcionservicio,precioservicios,preciototal} = req.body
         console.log(req.body);
-        connection.query("INSERT into facturafinal SET idProducto = ? idCliente = ? idServicio = ? total = ?",[idproducto,idcliente,idservicio,preciototal],
+        connection.query("SELECT MAX(id) AS id FROM carrito WHERE idcliente = ?",[idcliente],(error, results) =>{
+            if (error){
+                res.send(error);
+            }else{
+                let maximoid=results[0].id;
+            connection.query("UPDATE carrito SET total = ? WHERE id = ? ",[preciototal,maximoid],(err,result) => {
+                if (err){
+                    res.send(err);
+                }
+            })
+            
+            connection.query("INSERT into carrito SET idcliente = ?",[idcliente],
         (err, result) => {
         if (err){
             res.send(err);
         }else{
-            res.render("../views/carrito.ejs", {
-                conexion:results5,
+            res.render("../views/vistacliente.ejs", {
+                login: true,
                 name: req.session.name,
+                rol: req.session.rol,
+                id: req.session.id_element,
                 alert: true,
-                alertTitle: "Agregado exitosamente",
-                alertMessage: "¡Agregado exitosamente!",
+                alertTitle: "¡Compra exitosa!",
+                alertMessage: "¡Compra exitosa!",
                 alertIcon: "success",
                 showConfirmButton: false,
                 timer: 1500,
@@ -515,6 +580,10 @@ module.exports = app => {
         }
         
         })
+        }
+    });
+        
+        
     })
 
 
@@ -637,7 +706,7 @@ module.exports = app => {
                 id: req.session.id
             });
         } else if (req.session.loggedin && req.session.rol == "vendedor") {
-            res.render("../views/gestionaraplicacion.ejs", {
+            res.render("../views/gestionaraplicacionv.ejs", {
                 login: true,
                 name: req.session.name,
                 rol: req.session.rol,
