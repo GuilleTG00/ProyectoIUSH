@@ -697,6 +697,28 @@ module.exports = app => {
 
     })
 
+
+ 
+    app.get('/gestionaraplicacionv', (req, res) => {
+         if (req.session.loggedin && req.session.rol == "vendedor") {
+            res.render("../views/gestionaraplicacionv.ejs", {
+                login: true,
+                name: req.session.name,
+                rol: req.session.rol,
+                id: req.session.id
+            });
+        } else {
+            res.render("../views/index.ejs", {
+                login: false,
+                name: "por favor inicie sesión"
+            });
+        } 
+            
+    });
+
+
+
+
     app.get('/gestionaraplicacion', (req, res) => {
         if (req.session.loggedin && req.session.rol == "administrador") {
             res.render("../views/gestionaraplicacion.ejs", {
@@ -755,7 +777,7 @@ module.exports = app => {
                 if (error) {
                     res.send(error);
                 } else {
-                    res.render("../views/agregareliminar.ejs", {
+                    res.render("../views/vistas.ejs", {
                         alert: true,
                         alertTitle: "¡Producto agregado exitosamente!",
                         alertMessage: "¡Producto agregado exitosamente!",
@@ -778,7 +800,7 @@ module.exports = app => {
                 if (error) {
                     res.send(error);
                 } else {
-                    res.render("../views/registro.ejs", {
+                    res.render("../views/vistas.ejs", {
                         alert: true,
                         alertTitle: "Servicio agregado exitosamente!",
                         alertMessage: "Servicio agregado exitosamente!",
