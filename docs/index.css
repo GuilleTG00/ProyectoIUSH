@@ -1,0 +1,37 @@
+h3{
+  font-family: 'Montserrat', sans-serif;
+  color:lemonchiffon;
+  
+}
+#video_background {
+  min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: fixed;    
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);     
+    z-index: -100;
+    background-size: cover;
+    opacity: .85;
+}
+.header-overlay {
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #303952;
+      z-index: 1;
+      opacity: .68;
+}
+.centrar{
+position: absolute;
+top: 50%;
+left: 50%; 
+width: 600 px;
+height: 400px; 
+margin-top: -200px; 
+margin-left: -300px;
+}
